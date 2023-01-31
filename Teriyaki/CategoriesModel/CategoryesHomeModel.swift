@@ -57,55 +57,14 @@ struct Category2: Codable {
 
 
 
-enum ApiError: Error {
+enum ApiError2: Error {
     case noResponse
     case no200
     case noData
 }
 
-enum ApiError2: Error, CustomStringConvertible {
-    case badURL
-    case urlSession(URLError?)
-    case badResponse(Int)
-    case decoding(DecodingError?)
-    case unknown
-    
-    var description: String {
-        switch self {
-        case .badURL:
-            return "badURL"
-        case .urlSession(let error):
-            return "url session \(error.debugDescription)"
-        case .badResponse(let statusCode):
-            return "bad response with status code: \(statusCode)"
-        case .decoding(let decodingError):
-            return "decoding error: \(decodingError.debugDescription)"
-        case .unknown:
-            return "unknown error"
-        }
-    }
-    
-    var localizedDescription: String {
-        switch self {
-        case .badURL,.unknown:
-            return "something went wrong"
-        case .urlSession(let urlError):
-            return urlError?.localizedDescription ?? "something went wrong"
-        case .badResponse(_):
-            return "something went wrong"
-        case .decoding(let decodingError):
-            return decodingError?.localizedDescription ?? "something went wrong"
 
-        }
-    }
-}
 
-enum StatusFetch: Comparable {
-    case initional
-    case fetching
-    case fetched
-    case error(String)
-}
 
 
 class CategoryesHomeModel: ObservableObject {
@@ -255,7 +214,7 @@ class CategoryesHomeModel: ObservableObject {
             }
             
             guard let jsonData = data else {
-                completion(ApiError.noData)
+                completion(ApiError.badResponse(444))
                 print("CategoryesHomeModel: not products from session")
                 return  }
             
@@ -270,7 +229,7 @@ class CategoryesHomeModel: ObservableObject {
                     print("CategoryesHomeModel: failed to convert : \(error)")
 //                    self?.messageErr = error.localizedDescription
                     self?.statusFetchPrd = .error("Error: bad decode data fetchPrd3: \(error.localizedDescription)")
-                    completion(ApiError.noData)
+                    completion(ApiError.decoding(error as? DecodingError))
                 }
              }
         }
@@ -304,7 +263,7 @@ class CategoryesHomeModel: ObservableObject {
             }
             
             guard let jsonData = data else {
-                completion(ApiError.noData)
+                completion(ApiError.badResponse(444))
                 print("CategoryesHomeModel: not products from session")
                 return  }
             
@@ -331,7 +290,7 @@ class CategoryesHomeModel: ObservableObject {
                     print("CategoryesHomeModel: failed to convert : \(error.localizedDescription)")
 //                    self?.messageErr = error.localizedDescription
                     self?.statusFetchPrd = .error("Error: not decode data fetchPrd5: \(error.localizedDescription)")
-                    completion(ApiError.noData)
+                    completion(ApiError.decoding(error as? DecodingError))
                 }
              }
         }

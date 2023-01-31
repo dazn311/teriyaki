@@ -56,17 +56,18 @@ struct HomePage: View {
                             
                             if categoriesVM.statusFetchPrd == .fetched {
                                 if let catss = categoriesVM.dataProductsFromCatFilter[categoriesVM.parentId] {
-                                    ScrollView(showsIndicators: false) {
+//                                    ScrollView(showsIndicators: false) {
+                                    LazyVStack {
                                         ForEach(catss,  id: \.id) { categ in
-//                                            Text(categ.name)
-//                                                .foregroundColor(Color.indigo)
-                                            Section(categ.name) {
-                                                ForEach(categ.products,  id: \.id) { prd in
-                                                    Text(prd.name)
-                                                        .foregroundColor(Color.gray)
-                                                    
-                                                }
+                                            Text(categ.name)
+                                                .foregroundColor(Color.indigo)
+                                            
+                                            ForEach(categ.products,  id: \.id) { prd in
+                                                Text(prd.name)
+                                                    .foregroundColor(Color.gray)
+                                                
                                             }
+                                            
                                             
                                         }
                                     }

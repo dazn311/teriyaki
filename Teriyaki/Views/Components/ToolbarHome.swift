@@ -17,6 +17,7 @@ import SwiftUI
 
 struct ToolbarHome: View {
     @EnvironmentObject var categoriesVM : CategoryesHomeModel
+    @EnvironmentObject var viewModel : CategoriesListViewModel
     
     @Binding var flag: Bool
     @Binding var searchText: String
@@ -27,17 +28,17 @@ struct ToolbarHome: View {
         VStack{
             HStack {
                 Group {
-                    switch categoriesVM.statusFetch {
+                    switch viewModel.state {
                         case .fetched:
                             VStack {
                                 MenuCuisine(parentId: $categoriesVM.parentId)
-                                    .environmentObject(categoriesVM)
+                                    .environmentObject(viewModel)
                             }
                             .padding(.vertical,4)
                         case .initional:
                             Text("init")
                                 .onAppear {
-                                    categoriesVM.fetchCats()
+                                    viewModel.fetchCats(for: "/catstoplevel")
                                 }
                         case .fetching:
                             Text("fetching...")
@@ -65,7 +66,6 @@ struct ToolbarHome: View {
                       SearchBar(searchText: $searchText, flag: $flag)
                       .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                    
                   } else {
                     Spacer()
                       .frame(minWidth: 10)

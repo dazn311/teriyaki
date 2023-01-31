@@ -20,12 +20,21 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
     
     var body: some View {
-        HomePage()
-            .environment(\.colorScheme, colorScheme)
-            .environment(\.managedObjectContext, viewContext)
-//        @Environment(\.colorScheme) var colorScheme
-//        @Environment(\.managedObjectContext) var moc
-//        @EnvironmentObject var categoriesVM : CategoryesHomeModel
+
+        TabView {
+            HomePage()
+                .tabItem {
+                    Label("Home", systemImage: "menucard")
+                }
+    //            .environment(\.colorScheme, colorScheme)
+    //            .environment(\.managedObjectContext, viewContext)
+            SearchPageView()
+                .tabItem {
+                    Label("Search", systemImage: "list.bullet.circle")
+                }
+        }
+        
+
     }
 
 }
