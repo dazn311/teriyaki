@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Catalog" representedClassName="Catalog" syncable="YES">
+        <attribute name="categoryID" attributeType="String"/>
+        <attribute name="level" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="parentID" attributeType="String"/>
+        <attribute name="pathID" optional="YES" attributeType="String"/>
+        <attribute name="sortOrder" attributeType="String"/>
+        <attribute name="statuss" attributeType="String"/>
+    </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
+    <entity name="Product" representedClassName="Product" syncable="YES">
+        <attribute name="description2" attributeType="String"/>
+        <attribute name="href" attributeType="String"/>
+        <attribute name="jan" attributeType="String"/>
+        <attribute name="minimum" attributeType="String"/>
+        <attribute name="model" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="parentID" attributeType="String"/>
+        <attribute name="price" attributeType="String"/>
+        <attribute name="productID" attributeType="String"/>
+        <attribute name="rating" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="special" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="tax" attributeType="String"/>
+        <attribute name="thumb" attributeType="String"/>
+    </entity>
     <elements>
+        <element name="Catalog" positionX="-54" positionY="90" width="128" height="134"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="Product" positionX="-63" positionY="-9" width="128" height="224"/>
     </elements>
 </model>
