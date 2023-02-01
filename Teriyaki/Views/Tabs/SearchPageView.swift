@@ -35,14 +35,17 @@ struct SearchPageView: View {
                                                 .foregroundColor(Color.indigo)
                                             
                                             ForEach(categ.products,  id: \.id) { prd in
-                                                Text(prd.name)
-                                                    .foregroundColor(Color.gray)
+                                                NavigationLink(destination: ItemPrd(name: prd.name, pic: prd.thumb, describe: prd.description, price: prd.price)) {
+                                                    Text(prd.name)
+                                                        .foregroundColor(Color.gray)
+                                                }
                                                 
                                             }
 
                                         }
                                     }
                                     .listStyle(.plain)
+                                    
                                 }
                             }
                         case .initional:
@@ -62,6 +65,7 @@ struct SearchPageView: View {
                         .environmentObject(prdVM)
                 }
             }
+            
 
             Spacer()
         }//end navigation

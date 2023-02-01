@@ -55,7 +55,7 @@ struct ItemPrd: View {
    //                                         parentId = catObj.category_id
    //                 print(catObj.categoryID)
                 } label: {
-                    Text(price)
+                    Text(transformPrice(price: price))
                         .badge(3)
                         .foregroundColor(Color(red: 255 / 255, green: 225 / 255, blue: 189 / 255)) // If you have this
    //                     .foregroundColor(catObj.parentID == "0" ? Color(.red): Color(.black))
@@ -102,6 +102,7 @@ struct ItemPrd: View {
 
             
         }
+//        .toolbar(.hidden, for: .tabBar)
 //        .frame(maxWidth: .infinity, maxHeight: .infinity)
 //        .background(Color.indigo)
     
@@ -164,4 +165,13 @@ func transformDescribe(describe: String)-> String {
         return describe.replacingOccurrences(of: "&nbsp;", with: " ")
     }
     return describe
+}
+
+func transformPrice(price: String)-> String {
+    //&nbsp;
+    if price.contains(".") {
+        let pr = price.split(separator: ".")
+        return "\(pr[0])p"//price.replacingOccurrences(of: "&nbsp;", with: " ")
+    }
+    return "\(price)p"
 }
