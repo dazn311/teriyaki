@@ -9,37 +9,17 @@ import Foundation
 import Combine
 
 class CategoriesListViewModel: ObservableObject {
- 
-    
-    @Published var searchTerm: String = ""
-    @Published var categoriesArr: [Category] = []
-    
-    @Published var state: StatusFetch = .initional {
-        didSet {
-            print("state statusFetch2 change to: \(state)")
-        }
-    }
-    
-    @Published var parentId = "70"
-    
-    var subscriptions = Set<AnyCancellable>()
-    
     private let service = APIService()
     
-    init() {
-        print("start init CategoriesListViewModel")
-        
-//        $parentId
-//            .sink { [weak self] parId in
-//                self?.state = .fetching
-//                self?.fetchCats(for: "/catstoplevel")
-//        }.store(in: &subscriptions)
-    }
+    @Published var searchTerm: String = ""
+    @Published var data: [Category] = []
     
+    @Published var state: StatusFetch = .initional
+
+    var subscriptions = Set<AnyCancellable>()
     
     func fetchCats(for searchTerm: String) {
-        guard categoriesArr.count == 0 else {
-            print("222")
+        guard data.count == 0 else {
             return
         }
         
@@ -49,11 +29,8 @@ class CategoriesListViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                     case .success(let results):
-                        self?.categoriesArr = results.cats
+                        self?.data = results.cats
                         self?.state = .fetched
-
-                    print("fetched cats \(results.cats.count)")
-                        
                     case .failure(let error):
                         print("58-error loading catalog: \(error)")
                         self?.state = .error(error.localizedDescription)
@@ -61,10 +38,14 @@ class CategoriesListViewModel: ObservableObject {
             }
         }
     }
-    
-    
-    
-    
-    
-    
 }
+
+//    init() {
+//        print("CategoriesListViewModel -- init ")
+        
+//        $parentId
+//            .sink { [weak self] parId in
+//                self?.state = .fetching
+//                self?.fetchCats(for: "/catstoplevel")
+//        }.store(in: &subscriptions)
+//    }

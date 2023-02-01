@@ -10,13 +10,13 @@ import SwiftUI
 @main
 struct TeriyakiApp: App {
     let persistenceController = PersistenceController.shared
-    @ObservedObject var categoriesVM = CategoryesHomeModel()
-    @ObservedObject var viewModel = CategoriesListViewModel()
+    @ObservedObject var prdVM = ProductsListViewModel()
+    @ObservedObject var catsVM = CategoriesListViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(categoriesVM)
-                .environmentObject(viewModel)
+                .environmentObject(prdVM)
+                .environmentObject(catsVM)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

@@ -12,7 +12,7 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.colorScheme) var colorScheme
-//    @EnvironmentObject var categoriesVM : CategoryesHomeModel
+    @EnvironmentObject() var prdVM : ProductsListViewModel
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -26,12 +26,14 @@ struct ContentView: View {
                 .tabItem {
                     Label("Home", systemImage: "menucard")
                 }
+                .environmentObject(prdVM)
     //            .environment(\.colorScheme, colorScheme)
     //            .environment(\.managedObjectContext, viewContext)
             SearchPageView()
                 .tabItem {
                     Label("Search", systemImage: "list.bullet.circle")
                 }
+                .environmentObject(prdVM)
         }
         
 

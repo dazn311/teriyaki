@@ -32,6 +32,7 @@
 		C0AF1DED298946610076D856 /* CategoriesFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AF1DEC298946610076D856 /* CategoriesFetch.swift */; };
 		C0AF1DEF29894C0A0076D856 /* StatusFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AF1DEE29894C0A0076D856 /* StatusFetch.swift */; };
 		C0AF1DF1298964760076D856 /* SearchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AF1DF0298964760076D856 /* SearchPageView.swift */; };
+		C0AF1DF32989690B0076D856 /* ProductsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AF1DF22989690B0076D856 /* ProductsListViewModel.swift */; };
 		C0B5978E2983A11500655878 /* prettyJSONString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B5978D2983A11500655878 /* prettyJSONString.swift */; };
 		C0B597902983B24D00655878 /* ProgressImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B5978F2983B24D00655878 /* ProgressImage.swift */; };
 		C0B597922983C57A00655878 /* SetupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B597912983C57A00655878 /* SetupApp.swift */; };
@@ -66,6 +67,7 @@
 		C0AF1DEC298946610076D856 /* CategoriesFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesFetch.swift; sourceTree = "<group>"; };
 		C0AF1DEE29894C0A0076D856 /* StatusFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFetch.swift; sourceTree = "<group>"; };
 		C0AF1DF0298964760076D856 /* SearchPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageView.swift; sourceTree = "<group>"; };
+		C0AF1DF22989690B0076D856 /* ProductsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListViewModel.swift; sourceTree = "<group>"; };
 		C0B5978D2983A11500655878 /* prettyJSONString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prettyJSONString.swift; sourceTree = "<group>"; };
 		C0B5978F2983B24D00655878 /* ProgressImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressImage.swift; sourceTree = "<group>"; };
 		C0B597912983C57A00655878 /* SetupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupApp.swift; sourceTree = "<group>"; };
@@ -103,13 +105,13 @@
 		C049DD92297E3FAB0077B87E /* Teriyaki */ = {
 			isa = PBXGroup;
 			children = (
+				C049DD93297E3FAB0077B87E /* TeriyakiApp.swift */,
+				C049DD95297E3FAB0077B87E /* ContentView.swift */,
 				C0E8F39929891B4500B39AD5 /* styling */,
 				C0E8F39629884C4200B39AD5 /* model */,
 				C02D5E7B2983D59800352C1D /* Product+CoreDataClass.swift */,
 				C02D5E7C2983D59800352C1D /* Product+CoreDataProperties.swift */,
 				C0B5978C2983A0FC00655878 /* helpers */,
-				C049DD93297E3FAB0077B87E /* TeriyakiApp.swift */,
-				C049DD95297E3FAB0077B87E /* ContentView.swift */,
 				C049DDA9297E7FE20077B87E /* Views */,
 				C049DDA6297E794B0077B87E /* CategoriesModel */,
 				C049DD97297E3FAC0077B87E /* Assets.xcassets */,
@@ -136,6 +138,7 @@
 				C049DDA7297E796E0077B87E /* CategoryesHomeModel.swift */,
 				C088FEF82980D830005B18D2 /* MockeData.swift */,
 				C0AF1DE82989420A0076D856 /* CategoriesListViewModel.swift */,
+				C0AF1DF22989690B0076D856 /* ProductsListViewModel.swift */,
 			);
 			path = CategoriesModel;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				C02D5E802983D8D000352C1D /* FilteredListPrd.swift in Sources */,
 				C02D5E7D2983D59800352C1D /* Product+CoreDataClass.swift in Sources */,
 				C088FF00298118F6005B18D2 /* ToolbarHome.swift in Sources */,
+				C0AF1DF32989690B0076D856 /* ProductsListViewModel.swift in Sources */,
 				C0AF1DEB2989435D0076D856 /* FetchState.swift in Sources */,
 				C0AF1DEF29894C0A0076D856 /* StatusFetch.swift in Sources */,
 				C049DDA8297E796E0077B87E /* CategoryesHomeModel.swift in Sources */,

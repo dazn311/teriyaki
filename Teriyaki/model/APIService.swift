@@ -17,15 +17,10 @@ class APIService {
         fetch(type: CategoriesFetch.self, url: url, completion: completion)
     }
     
-//    func fetchSongs(searchTerm: String, page: Int, limit: Int, completion: @escaping(Result<SongResult,APIError>) -> Void) {
-//        let url = createURL(for: searchTerm, type: .song, page: page, limit: limit)
-//        fetch(type: SongResult.self, url: url, completion: completion)
-//    }
-//
-//    func fetchMovies(searchTerm: String, completion: @escaping(Result<MovieResult,APIError>) -> Void) {
-//        let url = createURL(for: searchTerm, type: .movie, page: nil, limit: nil)
-//        fetch(type: MovieResult.self, url: url, completion: completion)
-//    }
+    func fetchPrd(searchTerm: String, completion: @escaping(Result<PrdAndCatFetch,ApiError>) -> Void) {
+        let url = createURL(for: searchTerm, type: "prd")
+        fetch(type: PrdAndCatFetch.self, url: url, completion: completion)
+    }
     
     func fetch<T: Decodable>(type: T.Type, url: URL?, completion: @escaping(Result<T,ApiError>) -> Void) {
         
@@ -60,11 +55,15 @@ class APIService {
         // https://teriyaki.su/index.php?route=api/zstore3/catstoplevel
         
         let baseURL = "https://teriyaki.su/index.php"
-        var queryItems = [URLQueryItem(name: "route", value: "api/zstore3")]
+        var queryItems = [] as [URLQueryItem]
         
         if (type == "cat") {
 //            queryItems.append(URLQueryItem(name: "path", value: String(type)))
             queryItems = [URLQueryItem(name: "route", value: "api/zstore3\(searchTerm)")]
+        }
+        if (type == "prd") {
+            queryItems = [URLQueryItem(name: "route", value: "api/category")]
+            queryItems.append(URLQueryItem(name: "path", value: searchTerm))
         }
         
         var components = URLComponents(string: baseURL)
@@ -72,3 +71,16 @@ class APIService {
         return components?.url
     }
 }
+
+
+
+
+//    func fetchSongs(searchTerm: String, page: Int, limit: Int, completion: @escaping(Result<SongResult,APIError>) -> Void) {
+//        let url = createURL(for: searchTerm, type: .song, page: page, limit: limit)
+//        fetch(type: SongResult.self, url: url, completion: completion)
+//    }
+//
+//    func fetchMovies(searchTerm: String, completion: @escaping(Result<MovieResult,APIError>) -> Void) {
+//        let url = createURL(for: searchTerm, type: .movie, page: nil, limit: nil)
+//        fetch(type: MovieResult.self, url: url, completion: completion)
+//    }

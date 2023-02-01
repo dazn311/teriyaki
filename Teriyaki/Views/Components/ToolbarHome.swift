@@ -16,8 +16,8 @@ import SwiftUI
 //    }
 
 struct ToolbarHome: View {
-    @EnvironmentObject var categoriesVM : CategoryesHomeModel
-    @EnvironmentObject var viewModel : CategoriesListViewModel
+    @EnvironmentObject var prdVM : ProductsListViewModel
+    @EnvironmentObject var catsVM : CategoriesListViewModel
     
     @Binding var flag: Bool
     @Binding var searchText: String
@@ -25,20 +25,23 @@ struct ToolbarHome: View {
 //    @FocusState var showKeyBoard: Bool
     
     var body: some View {
-        VStack{
+        ZStack{
             HStack {
                 Group {
-                    switch viewModel.state {
+                    switch catsVM.state {
                         case .fetched:
-                            VStack {
-                                MenuCuisine(parentId: $categoriesVM.parentId)
-                                    .environmentObject(viewModel)
+                            HStack(alignment: .center) {
+                                MenuCuisine(prdParentId: $prdVM.parentId)
+                                    .environmentObject(catsVM)
+                        
                             }
-                            .padding(.vertical,4)
+//                            .frame(maxWidth: 130, maxHeight: 30)
+//                            .padding(.vertical,4)
+                            .clipped()
                         case .initional:
                             Text("init")
                                 .onAppear {
-                                    viewModel.fetchCats(for: "/catstoplevel")
+                                    catsVM.fetchCats(for: "/catstoplevel")
                                 }
                         case .fetching:
                             Text("fetching...")
@@ -52,15 +55,7 @@ struct ToolbarHome: View {
                 Spacer()
                     .frame(width: flag == false ?(UIScreen.main.bounds.size.width / 2) - 140 : 2)
 
-                let heightLogo = CGFloat(36)
-                    withAnimation(.spring()) {
-                        Image("logo22")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: flag == false ? heightLogo : 0, height: flag == false ? heightLogo : 0)
-                            .clipShape(Circle())
-                            .offset(x: 0, y: -10)
-                    }
+                
 
                   if flag {
                       SearchBar(searchText: $searchText, flag: $flag)
@@ -88,7 +83,17 @@ struct ToolbarHome: View {
                   }
             
             }
-            
+            HStack {
+                let heightLogo = CGFloat(36)
+                    withAnimation(.spring()) {
+                        Image("logo22")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: flag == false ? heightLogo : 0, height: flag == false ? heightLogo : 0)
+                            .clipShape(Circle())
+                            .offset(x: 0, y: -5)
+                    }
+            }
         }
     }//end body
     

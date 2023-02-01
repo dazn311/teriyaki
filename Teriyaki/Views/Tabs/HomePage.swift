@@ -10,7 +10,7 @@ import SwiftUI
 struct HomePage: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var categoriesVM : CategoryesHomeModel
+    @EnvironmentObject var prdVM : ProductsListViewModel
     
     private var columns: [GridItem] = [GridItem(spacing: 4, alignment: .center),GridItem(spacing: 4, alignment: .center)]
     private var columnsSingel: [GridItem] = [GridItem()]
@@ -54,8 +54,8 @@ struct HomePage: View {
                             
                             
                             
-                            if categoriesVM.statusFetchPrd == .fetched {
-                                if let catss = categoriesVM.dataProductsFromCatFilter[categoriesVM.parentId] {
+                            if prdVM.state == .fetched {
+                                if let catss = prdVM.dataArr[prdVM.parentId] {
 //                                    ScrollView(showsIndicators: false) {
                                     LazyVStack {
                                         ForEach(catss,  id: \.id) { categ in
@@ -73,6 +73,8 @@ struct HomePage: View {
                                     }
                                     .listStyle(.plain)
                                 }
+                            }else {
+                                EmptyView()
                             }
                             
                                
@@ -159,9 +161,8 @@ struct HomePage: View {
             .padding(.horizontal,4)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    ToolbarHome(flag: $flag, searchText: $categoriesVM.searchText)
-                        .environmentObject(categoriesVM)
-                    //@EnvironmentObject var categoriesVM : CategoryesHomeModel
+                    ToolbarHome(flag: $flag, searchText: $prdVM.searchTerm)
+                        .environmentObject(prdVM)
                 }
             }
 
@@ -169,17 +170,17 @@ struct HomePage: View {
         }//end navigation
     }
     
-    func closuresFetchPrd(parentId: String) {
-        categoriesVM.statusFetchPrd = .fetching
-        
-        categoriesVM.fetchProductsFromCat(parentId: parentId, completion: { error in
-            if let error = error {
-                categoriesVM.statusFetchPrd = .error("Error: not completion fetchPrdFromCat")
-                print("fetchProductsFromCat:\(error.localizedDescription)")
-                return
-            }
-        })
-    }
+//    func closuresFetchPrd(parentId: String) {
+//        categoriesVM.statusFetchPrd = .fetching
+//        
+//        categoriesVM.fetchProductsFromCat(parentId: parentId, completion: { error in
+//            if let error = error {
+//                categoriesVM.statusFetchPrd = .error("Error: not completion fetchPrdFromCat")
+//                print("fetchProductsFromCat:\(error.localizedDescription)")
+//                return
+//            }
+//        })
+//    }
 }
 
 private let itemFormatter: DateFormatter = {
@@ -190,10 +191,9 @@ private let itemFormatter: DateFormatter = {
 }()
 
 struct HomePage_Previews: PreviewProvider {
-    static let categoriesVM : CategoryesHomeModel = {
-       let categoriesVM = CategoryesHomeModel()
-        categoriesVM.dataCategories = prevDataCategories
-        categoriesVM.dataProductsFromCatFilter = PrdAndCatData()
+    static let categoriesVM : ProductsListViewModel = {
+       let categoriesVM = ProductsListViewModel()
+//        categoriesVM.dataArr = prevDataCategories
         return categoriesVM
     }()
     

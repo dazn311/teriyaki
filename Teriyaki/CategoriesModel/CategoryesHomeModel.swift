@@ -191,51 +191,51 @@ class CategoryesHomeModel: ObservableObject {
     }
     
     
-    func fetchProducts (completion: @escaping (Error?) -> () ) {
-        guard let yourUrl = URL(string: SetupApp.urlProducts) else {
-            return
-        }
-
-        var request = URLRequest(url: yourUrl)
-        request.httpMethod = "GET"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.allHTTPHeaderFields = ["Content-Type":"application/json"]
-        request.setValue(SetupApp.retrieveToken, forHTTPHeaderField: "api_token")
-        
-        session = URLSession(configuration: URLSessionConfiguration.default)
-        let task = session.dataTask(with: request) { [weak self](  data, res, error)  in
-
-            if let statusCode = (res as? HTTPURLResponse)?.statusCode, statusCode >= 400 {
-                DispatchQueue.main.async {
-                    self?.statusFetchPrd = .error("Error: bad status response fetchPrd2: \(statusCode)")
-//                    self?.messageErr = "Bad status: \(statusCode)"
-                }
-                completion(error)
-            }
-            
-            guard let jsonData = data else {
-                completion(ApiError.badResponse(444))
-                print("CategoryesHomeModel: not products from session")
-                return  }
-            
-//            prettyJSONString(jsonData: jsonData)
-
-            DispatchQueue.main.async {
-                do {
-                    let tmpData = try JSONDecoder().decode(PrdFetch.self, from: jsonData)
-                    self?.dataProducts = tmpData.products
-                    self?.statusFetchPrd = .fetched
-                } catch {
-                    print("CategoryesHomeModel: failed to convert : \(error)")
-//                    self?.messageErr = error.localizedDescription
-                    self?.statusFetchPrd = .error("Error: bad decode data fetchPrd3: \(error.localizedDescription)")
-                    completion(ApiError.decoding(error as? DecodingError))
-                }
-             }
-        }
-        
-        task.resume()
-    }
+//    func fetchProducts (completion: @escaping (Error?) -> () ) {
+//        guard let yourUrl = URL(string: SetupApp.urlProducts) else {
+//            return
+//        }
+//
+//        var request = URLRequest(url: yourUrl)
+//        request.httpMethod = "GET"
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.allHTTPHeaderFields = ["Content-Type":"application/json"]
+//        request.setValue(SetupApp.retrieveToken, forHTTPHeaderField: "api_token")
+//        
+//        session = URLSession(configuration: URLSessionConfiguration.default)
+//        let task = session.dataTask(with: request) { [weak self](  data, res, error)  in
+//
+//            if let statusCode = (res as? HTTPURLResponse)?.statusCode, statusCode >= 400 {
+//                DispatchQueue.main.async {
+//                    self?.statusFetchPrd = .error("Error: bad status response fetchPrd2: \(statusCode)")
+////                    self?.messageErr = "Bad status: \(statusCode)"
+//                }
+//                completion(error)
+//            }
+//            
+//            guard let jsonData = data else {
+//                completion(ApiError.badResponse(444))
+//                print("CategoryesHomeModel: not products from session")
+//                return  }
+//            
+////            prettyJSONString(jsonData: jsonData)
+//
+//            DispatchQueue.main.async {
+//                do {
+//                    let tmpData = try JSONDecoder().decode(PrdFetch.self, from: jsonData)
+//                    self?.dataProducts = tmpData.products
+//                    self?.statusFetchPrd = .fetched
+//                } catch {
+//                    print("CategoryesHomeModel: failed to convert : \(error)")
+////                    self?.messageErr = error.localizedDescription
+//                    self?.statusFetchPrd = .error("Error: bad decode data fetchPrd3: \(error.localizedDescription)")
+//                    completion(ApiError.decoding(error as? DecodingError))
+//                }
+//             }
+//        }
+//        
+//        task.resume()
+//    }
     
 
     
