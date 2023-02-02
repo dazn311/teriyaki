@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomePage: View {
-    @Environment(\.colorScheme) var colorScheme
+//    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var prdVM : ProductsListViewModel
     
     private var columns: [GridItem] = [GridItem(spacing: 4, alignment: .center),GridItem(spacing: 4, alignment: .center)]
@@ -21,22 +21,21 @@ struct HomePage: View {
         
         NavigationView {
             VStack {
+//                Image("101")
                 ScrollView(showsIndicators: false) {
-
                     if prdVM.state == .fetched {
                         if let catss = prdVM.dataArr[prdVM.parentId] {
-//                                    ScrollView(showsIndicators: false) {
                             LazyVStack {
                                 ForEach(catss,  id: \.id) { categ in
                                     Text(categ.name)
                                         .foregroundColor(Color.indigo)
-                                    
-                                    ForEach(categ.products,  id: \.id) { prd in
-                                        Text(prd.name)
-                                            .foregroundColor(Color.gray)
-                                        
-                                    }
-                                    
+
+//                                    let col = searchProducts.count > 1 ? columns : columnsSingel
+                                    LazyVGrid(columns: columns, spacing: 0) {
+                                                ForEach(categ.products,  id: \.id) { prdObj in
+                                                    ItemPrd(id: prdObj.id ,name: prdObj.name, pic: prdObj.thumb, describe: prdObj.description, price: prdObj.price)
+                                                }
+                                    }//end lazyVGrid
                                     
                                 }
                             }
@@ -51,7 +50,7 @@ struct HomePage: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     ToolbarHome(flag: $flag, searchText: $prdVM.searchTerm)
-                        .environmentObject(prdVM)
+//                        .environmentObject(prdVM)
                 }
             }
             Spacer()

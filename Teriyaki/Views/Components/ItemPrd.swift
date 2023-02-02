@@ -8,6 +8,7 @@ import UIKit
 import SwiftUI
 
 struct ItemPrd: View {
+    var id = "1"
     var name = "test"
     var pic = ""
     var describe = ""
@@ -15,7 +16,8 @@ struct ItemPrd: View {
     
     var body: some View {
         VStack(spacing: 1) {
-            CacheAsyncImage(url: URL(string: pic)!) { AsyncImagePhase in
+//            Text("id: \(id)")
+            CacheAsyncImage(id: id, url: URL(string: pic)!) { AsyncImagePhase in
                 switch AsyncImagePhase {
                         case .success(let image):
                             image
@@ -23,17 +25,17 @@ struct ItemPrd: View {
                             .scaledToFill()
                             .clipped()
                         case .empty:
-                            Image(systemName: "Placeholder Image")
+                            Image(systemName: "sleep")
                             .resizable()
                             .scaledToFill()
                             .clipped()
                         case .failure(_):
-                            Image(systemName: "Error Image")
+                            Image(systemName: "power.dotted")
                             .resizable()
                             .scaledToFill()
                             .clipped()
                         @unknown default:
-                            Image(systemName: "Placeholder Image")
+                            Image("\(id)")
                             .resizable()
                             .scaledToFill()
                             .clipped()
