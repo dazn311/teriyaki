@@ -52,3 +52,4 @@ struct PrdAndCatFetch: Codable {
 //}
 typealias PrdAndCatData = [String: [CatAndPrd]]
 
+//let prevPrdAndCatData: PrdAndCatData = ["70": [CatAndPrd(name: "sdf", thumb: "df", parentID: "70", id: "93", sortOrder: "1", products: [ProductFromCatalog(id: "23", thumb: "sdf", name: "ddd", description: "sss", price: "222", jan: "spicy", sortOrder: "3", viewed: "1", categoryID: "12", rating: 1, href: "23eddd")])],)]

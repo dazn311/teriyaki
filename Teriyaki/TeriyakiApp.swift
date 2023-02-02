@@ -10,8 +10,8 @@ import SwiftUI
 @main
 struct TeriyakiApp: App {
     let persistenceController = PersistenceController.shared
-    @ObservedObject var prdVM = ProductsListViewModel()
-    @ObservedObject var catsVM = CategoriesListViewModel()
+    @StateObject var prdVM = ProductsListViewModel()
+    @StateObject var catsVM = CategoriesListViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()

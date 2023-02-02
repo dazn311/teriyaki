@@ -8,17 +8,8 @@
 import SwiftUI
 import CoreData
 
-
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject() var prdVM : ProductsListViewModel
-    
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-    
+
     var body: some View {
 
         TabView {
@@ -26,19 +17,13 @@ struct ContentView: View {
                 .tabItem {
                     Label("Home", systemImage: "menucard")
                 }
-                .environmentObject(prdVM)
-    //            .environment(\.colorScheme, colorScheme)
-    //            .environment(\.managedObjectContext, viewContext)
+
             SearchPageView()
                 .tabItem {
                     Label("Search", systemImage: "list.bullet.circle")
                 }
-                .environmentObject(prdVM)
         }
-        
-
     }
-
 }
 
 
@@ -51,7 +36,14 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(categoriesVM)
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext) 
     }
 }
+
+
+//    @Environment(\.managedObjectContext) private var viewContext
+
+//    @FetchRequest(
+//        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+//        animation: .default)
+//    private var items: FetchedResults<Item>

@@ -11,7 +11,7 @@ import Combine
 class CategoriesListViewModel: ObservableObject {
     private let service = APIService()
     
-    @Published var searchTerm: String = ""
+//    @Published var searchTerm: String = ""
     @Published var data: [Category] = []
     
     @Published var state: StatusFetch = .initional

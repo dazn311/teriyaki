@@ -8,35 +8,21 @@
 import SwiftUI
 
 struct SearchBar: View {
-    
-    
+
     @Binding var searchText: String
     @Binding var flag: Bool
-//    @FocusedBinding var showKeyBoard: FocusedValue
-//    @FocusedBinding<Bool> var showKeyBoard: Bool?
-
     
     var body: some View {
-//        VStack(alignment: .leading) {
-//            TextField("",text:$searchText)
-//                .font(.title2)
-//                .foregroundColor(.neumorphictextColor)
             HStack {
-//                TextField("Search...", text: $searchText)
-//                    .focused($showKeyBoard)
                 NeumorphicStyleTextField(textField: TextField("Search...", text: $searchText), imageName: "magnifyingglass")
-                    
-                
                 Button("✖︎") {
                     withAnimation(.spring()) {
                         searchText = ""
                         flag = false
-//                        showKeyBoard.toggle()
                         
                     }
                 }.foregroundColor(Color.gray)
             }
-//        }.padding()
     }
 }
 
@@ -63,36 +49,18 @@ struct NeumorphicStyleTextField: View {
     var body: some View {
         HStack {
             Image(systemName: imageName)
-//                .foregroundColor(.darkShadow)
             textField
                 .focused($focusedField, equals: .field)
-//                .task {
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//                            self.focusedField = .field
-//                    }
-//                          }
-//                .onAppear{
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {  /// Anything over 0.5 seems to work
-//                                self.focusedField = .field
-//                           }
-//                }
                 
         }
         .padding()
         .cornerRadius(6)
-        .onAppear{
+        .task {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {  /// Anything over 0.5 seems to work
                 self.focusedField = .field
             }
         }
-//            .foregroundColor(.neumorphictextColor)
-//            .background(Color.background)
-            
-//            .shadow(color: Color.darkShadow, radius: 3, x: 2, y: 2)
-//            .shadow(color: Color.lightShadow, radius: 3, x: -2, y: -2)
-
-
-        }
+    }
 }
 
 extension Color {

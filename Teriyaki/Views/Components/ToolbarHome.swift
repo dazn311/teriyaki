@@ -6,14 +6,6 @@
 //
 
 import SwiftUI
-//
-//struct FocusedPost: FocusedValueKey {
-//    typealias Value = Binding<Bool>
-//}
-//
-//enum FocusedField {
-//        case firstName, lastName
-//    }
 
 struct ToolbarHome: View {
     @EnvironmentObject var prdVM : ProductsListViewModel
@@ -21,9 +13,7 @@ struct ToolbarHome: View {
     
     @Binding var flag: Bool
     @Binding var searchText: String
-    
-//    @FocusState var showKeyBoard: Bool
-    
+
     var body: some View {
         ZStack{
             HStack {
@@ -33,16 +23,13 @@ struct ToolbarHome: View {
                             HStack(alignment: .center) {
                                 MenuCuisine(prdParentId: $prdVM.parentId)
                                     .environmentObject(catsVM)
-                        
                             }
-//                            .frame(maxWidth: 130, maxHeight: 30)
-//                            .padding(.vertical,4)
                             .clipped()
                         case .initional:
                             Text("init")
-                                .onAppear {
-                                    catsVM.fetchCats(for: "/catstoplevel")
-                                }
+                            .onAppear {
+                                catsVM.fetchCats(for: "/catstoplevel")
+                            }
                         case .fetching:
                             Text("fetching...")
                         case .error(_):
@@ -83,17 +70,7 @@ struct ToolbarHome: View {
                   }
             
             }
-            HStack {
-                let heightLogo = CGFloat(36)
-                    withAnimation(.spring()) {
-                        Image("logo22")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: flag == false ? heightLogo : 0, height: flag == false ? heightLogo : 0)
-                            .clipShape(Circle())
-                            .offset(x: 0, y: -5)
-                    }
-            }
+            Logo(flag: $flag)
         }
     }//end body
     

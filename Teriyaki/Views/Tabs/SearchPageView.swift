@@ -9,14 +9,12 @@ import SwiftUI
 
 struct SearchPageView: View {
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var prdVM : ProductsListViewModel
     
     private var columns: [GridItem] = [GridItem(spacing: 4, alignment: .center),GridItem(spacing: 4, alignment: .center)]
     private var columnsSingel: [GridItem] = [GridItem()]
     
     @State var flag = false
-    
     @State var offset: CGPoint = .zero
 
 
@@ -39,13 +37,10 @@ struct SearchPageView: View {
                                                     Text(prd.name)
                                                         .foregroundColor(Color.gray)
                                                 }
-                                                
                                             }
-
                                         }
                                     }
                                     .listStyle(.plain)
-                                    
                                 }
                             }
                         case .initional:
@@ -65,11 +60,8 @@ struct SearchPageView: View {
                         .environmentObject(prdVM)
                 }
             }
-            
-
             Spacer()
         }//end navigation
     }
-    
 }
 
