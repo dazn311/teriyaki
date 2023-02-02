@@ -17,6 +17,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Home", systemImage: "menucard")
                 }
+//                .badge(2)
 
             SearchPageView()
                 .tabItem {

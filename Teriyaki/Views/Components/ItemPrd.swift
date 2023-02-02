@@ -97,6 +97,13 @@ struct ItemPrd: View {
             .padding(.bottom,4)
             
         }
+//        .navigationBarTitle(name)
+//                    .navigationBarTitleDisplayMode(.inline)
+//                    .navigationTitle("helllo")
+//        .edgesIgnoringSafeArea(.all)
+//        .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height - 100)
+//        .background(Color.green)
+        
     }
 }
 
