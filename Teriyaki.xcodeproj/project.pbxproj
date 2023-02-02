@@ -40,6 +40,7 @@
 		C0B597922983C57A00655878 /* SetupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B597912983C57A00655878 /* SetupApp.swift */; };
 		C0E8F39829884C6400B39AD5 /* CatAndPrd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E8F39729884C6400B39AD5 /* CatAndPrd.swift */; };
 		C0E8F39B29891B6100B39AD5 /* BuyBtnStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E8F39A29891B6100B39AD5 /* BuyBtnStyle.swift */; };
+		C0E9814C298BFE3C00E77902 /* BtnPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9814B298BFE3C00E77902 /* BtnPay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		C0B597912983C57A00655878 /* SetupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupApp.swift; sourceTree = "<group>"; };
 		C0E8F39729884C6400B39AD5 /* CatAndPrd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatAndPrd.swift; sourceTree = "<group>"; };
 		C0E8F39A29891B6100B39AD5 /* BuyBtnStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyBtnStyle.swift; sourceTree = "<group>"; };
+		C0E9814B298BFE3C00E77902 /* BtnPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnPay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				C088FF012981227A005B18D2 /* CacheAsyncImage.swift */,
 				C0B5978F2983B24D00655878 /* ProgressImage.swift */,
 				C00197AD298B4623004B2029 /* Logo.swift */,
+				C0E9814B298BFE3C00E77902 /* BtnPay.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				C049DD94297E3FAB0077B87E /* TeriyakiApp.swift in Sources */,
 				C0B597922983C57A00655878 /* SetupApp.swift in Sources */,
 				C02D5E802983D8D000352C1D /* FilteredListPrd.swift in Sources */,
+				C0E9814C298BFE3C00E77902 /* BtnPay.swift in Sources */,
 				C02D5E7D2983D59800352C1D /* Product+CoreDataClass.swift in Sources */,
 				C088FF00298118F6005B18D2 /* ToolbarHome.swift in Sources */,
 				C0AF1DF32989690B0076D856 /* ProductsListViewModel.swift in Sources */,

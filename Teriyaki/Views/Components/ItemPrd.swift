@@ -13,97 +13,56 @@ struct ItemPrd: View {
     var pic = ""
     var describe = ""
     var price = "0"
+    var isShowPrice: Bool = false
     
     var body: some View {
-        VStack(spacing: 1) {
-//            Text("id: \(id)")
-            CacheAsyncImage(id: id, url: URL(string: pic)!) { AsyncImagePhase in
-                switch AsyncImagePhase {
-                        case .success(let image):
-                            image
-                            .resizable()
-                            .scaledToFill()
-                            .clipped()
-                        case .empty:
-                            Image(systemName: "sleep")
-                            .resizable()
-                            .scaledToFill()
-                            .clipped()
-                        case .failure(_):
-                            Image(systemName: "power.dotted")
-                            .resizable()
-                            .scaledToFill()
-                            .clipped()
-                        @unknown default:
-                            Image("\(id)")
-                            .resizable()
-                            .scaledToFill()
-                            .clipped()
-                        }
-                
-            }
-            
-            VStack(alignment: .leading, spacing: 0) {
-                Text("\(name)")
-                    .foregroundColor(Color(red: 205 / 255, green: 91 / 255, blue: 15 / 255)) // If you have this
-                    .frame(maxWidth: .infinity, minHeight: 40, alignment: .topLeading)
-                    .padding(.horizontal,0)
-                Text(transformDescribe(describe: describe))
-                    .foregroundColor(Color.gray)
-                    .padding(.horizontal,0)
-                    .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80, alignment: .topLeading)
-                    .lineLimit(3)
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 1) {
+    //            Text("id: \(id)")
+                CacheAsyncImage(id: id, url: URL(string: pic)!) { AsyncImagePhase in
+                    switch AsyncImagePhase {
+                            case .success(let image):
+                                image
+                                .resizable()
+                                .scaledToFit()
+                            case .empty:
+                                Image(systemName: "sleep")
+                                .resizable()
+                                .clipped()
+                            case .failure(_):
+                                Image(systemName: "power.dotted")
+                                .resizable()
+                                .clipped()
+                            @unknown default:
+                                Image("\(id)")
+                                .resizable()
+                                .clipped()
+                            }
+                    
+                }
                 
                 
-            }
-            .frame(minHeight: 128, maxHeight: 128, alignment: .leading)
-            
-            HStack {
-                Button {
-   //                                         parentId = catObj.category_id
-   //                 print(catObj.categoryID)
-                } label: {
-                    Text(transformPrice(price: price))
-                        .badge(3)
-                        .foregroundColor(Color(red: 255 / 255, green: 225 / 255, blue: 189 / 255)) // If you have this
-                        .frame(maxHeight: 30)
-                        .padding(.horizontal,16)
-                        .padding(.vertical, 2)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .stroke(Color.white, lineWidth: 1))
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("\(name)")
+                        .foregroundColor(Color(red: 205 / 255, green: 91 / 255, blue: 15 / 255)) // If you have this
+                        .frame(maxWidth: .infinity, minHeight: 40, alignment: .topLeading)
+                        .padding(.horizontal,0)
+                    Text(transformDescribe(describe: describe))
+                        .foregroundColor(Color.gray)
+                        .padding(.horizontal,0)
+                        .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80, alignment: .topLeading)
+                        .lineLimit(3)
+                    
+                    
+                }
+                .frame(minHeight: 128, maxHeight: 128, alignment: .leading)
+                if isShowPrice {
+                    BtnPay(price: price)
+                }
 
-                }
-                .cornerRadius(4)         // You also need th
-                .overlay(alignment: .topTrailing) {
-                    Text("3")
-                        .fixedSize(horizontal: true, vertical: false)
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(Color.white)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(
-                            Capsule()
-                                .fill(Color.red)
-                                .aspectRatio(1, contentMode: .fill)
-                        )
-                        .offset(x: 5, y: -10)
-                }
-                
-                Spacer()
             }
-            .frame(minHeight: 50, maxHeight: 50, alignment: .leading)
-            .padding(.horizontal,10)
-            .padding(.bottom,4)
-            
+            Spacer()
         }
-//        .navigationBarTitle(name)
-//                    .navigationBarTitleDisplayMode(.inline)
-//                    .navigationTitle("helllo")
-//        .edgesIgnoringSafeArea(.all)
-//        .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height - 100)
-//        .background(Color.green)
-        
     }
 }
 

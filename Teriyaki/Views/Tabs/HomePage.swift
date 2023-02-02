@@ -33,10 +33,12 @@ struct HomePage: View {
 //                                    let col = searchProducts.count > 1 ? columns : columnsSingel
                                     LazyVGrid(columns: columns, spacing: 0) {
                                                 ForEach(categ.products,  id: \.id) { prdObj in
-                                                    NavigationLink(destination: ItemPrd(id: prdObj.id ,name: prdObj.name, pic: prdObj.thumb, describe: prdObj.description, price: prdObj.price).offset(x: 0, y: -100)) {
-                                                        ItemPrd(id: prdObj.id ,name: prdObj.name, pic: prdObj.thumb, describe: prdObj.description, price: prdObj.price)
+                                                    VStack(spacing: 0) {
+                                                        NavigationLink(destination: ItemPrd(id: prdObj.id ,name: prdObj.name, pic: prdObj.thumb, describe: prdObj.description, price: prdObj.price, isShowPrice: true)) {
+                                                            ItemPrd(id: prdObj.id ,name: prdObj.name, pic: prdObj.thumb, describe: prdObj.description, price: prdObj.price, isShowPrice: false)
+                                                        }
+                                                        BtnPay(price: prdObj.price)
                                                     }
-                                                    
                                                 }
                                     }//end lazyVGrid
                                     

@@ -33,10 +33,10 @@ struct SearchPageView: View {
                                                 .foregroundColor(Color.indigo)
                                             
                                             ForEach(categ.products,  id: \.id) { prd in
-                                                NavigationLink(destination: ItemPrd(id: prd.id,name: prd.name, pic: prd.thumb, describe: prd.description, price: prd.price)
-                                                    .offset(x: 0, y: -100)) {
+                                                NavigationLink(destination: ItemPrd(id: prd.id,name: prd.name, pic: prd.thumb, describe: prd.description, price: prd.price, isShowPrice: true))
+                                                {
                                                     Text(prd.name)
-                                                        .foregroundColor(Color.gray)
+                                                    .foregroundColor(Color.gray)
                                                 }
                                                 .tag(prd.id)
                                             }
