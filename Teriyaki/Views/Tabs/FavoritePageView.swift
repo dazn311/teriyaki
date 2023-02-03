@@ -1,5 +1,5 @@
 //
-//  CartPageView.swift
+//  FavoritePageView.swift
 //  Teriyaki
 //
 //  Created by dazn311 on 03.02.2023.
@@ -7,16 +7,21 @@
 
 import SwiftUI
 
-struct CartPageView: View {
+struct FavoritePageView: View {
     @FetchRequest var fetchRequestPrd: FetchedResults<Product>
     
     var body: some View {
         VStack {
-            Text("CartPage")
+            Text("Избранные")
             
-            List(fetchRequestPrd, id: \.self) { prd in
-                Section(prd.wrappedName) {
-                    Text("\(prd.wrappedName)")
+            List(["Избранные"], id: \.self) { cat in
+                Section(cat) {
+                    ForEach(fetchRequestPrd, id: \.self) { prd in
+                        Text("\(prd.wrappedName)")
+                    }
+                    .onDelete { IndexSet in
+                        print("del")
+                    }
                 }
             }
         }

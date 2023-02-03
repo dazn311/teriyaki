@@ -11,23 +11,7 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     var body: some View {
-
-        TabView {
-            HomePage()
-                .tabItem {
-                    Label("Home", systemImage: "menucard")
-                }
-//                .badge(2)
-
-            SearchPageView()
-                .tabItem {
-                    Label("Search", systemImage: "list.bullet.circle")
-                }
-            CartPageView(filter: "parentID")
-                .tabItem {
-                    Label("Cart", systemImage: "bag")
-                }
-        }
+        TabMenuView()
     }
 }
 

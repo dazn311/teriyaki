@@ -30,6 +30,14 @@ extension Product {
     @NSManaged public var tax: String?
     @NSManaged public var thumb: String?
     
+    public var wrappedName: String {
+        if let nm = name {
+            return String(nm)
+        }else {
+            return "**"
+        }
+        
+    }
     public var wrappedDescription: String {
         if let desc = description2 {
             return String(desc.split(separator: ".").first ?? "")
