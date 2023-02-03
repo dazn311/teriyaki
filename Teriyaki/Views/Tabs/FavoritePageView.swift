@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FavoritePageView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest var fetchRequestPrd: FetchedResults<Product>
     
     var body: some View {
@@ -17,10 +18,29 @@ struct FavoritePageView: View {
             List(["Избранные"], id: \.self) { cat in
                 Section(cat) {
                     ForEach(fetchRequestPrd, id: \.self) { prd in
-                        Text("\(prd.wrappedName)")
+                        HStack {
+//                            AsyncImage(url: URL(string: prd.url))
+//                                .frame(width: 44, height: 44)
+//                                .background(Color.gray)
+//                                .clipShape(Circle())
+                            
+                            AsyncImage(url: URL(string: prd.url)) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                .frame(width: 44)
+                                .background(Color.gray)
+                                .clipShape(Rectangle())
+                                
+                            Text("\(prd.wrappedName)")
+                        }
                     }
                     .onDelete { IndexSet in
-                        print("del")
+                        print("del: \(IndexSet)")
+                        self.deleteTodo(prds: Array(fetchRequestPrd), offesets: IndexSet)
                     }
                 }
             }
@@ -30,7 +50,14 @@ struct FavoritePageView: View {
     init(filter: String) {
         _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [], predicate: nil)
 //        _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [], predicate: NSPredicate(format: "parentID BEGINSWITH %@", filter))
-
+    }
+    
+    func deleteTodo(prds: [Product], offesets: IndexSet){
+        for index in offesets {
+          let prd = prds[index]
+            viewContext.delete(prd)
+        }
+        try? viewContext.save()
     }
 }
 

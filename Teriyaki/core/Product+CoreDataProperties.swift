@@ -38,6 +38,14 @@ extension Product {
         }
         
     }
+    public var url: String {
+        if let url2 = thumb {
+            return String(url2)
+        }else {
+            return "https//teriyaki.su"
+        }
+        
+    }
     public var wrappedDescription: String {
         if let desc = description2 {
             return String(desc.split(separator: ".").first ?? "")
