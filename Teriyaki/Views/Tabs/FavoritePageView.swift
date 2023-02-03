@@ -1,9 +1,3 @@
-//
-//  FavoritePageView.swift
-//  Teriyaki
-//
-//  Created by dazn311 on 03.02.2023.
-//
 
 import SwiftUI
 
@@ -19,15 +13,10 @@ struct FavoritePageView: View {
                 Section(cat) {
                     ForEach(fetchRequestPrd, id: \.self) { prd in
                         HStack {
-//                            AsyncImage(url: URL(string: prd.url))
-//                                .frame(width: 44, height: 44)
-//                                .background(Color.gray)
-//                                .clipShape(Circle())
-                            
                             AsyncImage(url: URL(string: prd.url)) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFit()
+                                image
+                                    .resizable()
+                                    .scaledToFit()
                                 } placeholder: {
                                     ProgressView()
                                 }
@@ -36,6 +25,7 @@ struct FavoritePageView: View {
                                 .clipShape(Rectangle())
                                 
                             Text("\(prd.wrappedName)")
+                            Text("\(prd.wrapPrice)")
                         }
                     }
                     .onDelete { IndexSet in
@@ -48,7 +38,8 @@ struct FavoritePageView: View {
     }
     
     init(filter: String) {
-        _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [], predicate: nil)
+        _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [SortDescriptor(\.price)], predicate: nil)
+//        _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [], predicate: nil)
 //        _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [], predicate: NSPredicate(format: "parentID BEGINSWITH %@", filter))
     }
     

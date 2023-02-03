@@ -1,9 +1,3 @@
-//
-//  ItemPrd.swift
-//  Teriyaki
-//
-//  Created by dazn311 on 25.01.2023.
-//
 import UIKit
 import SwiftUI
 

@@ -30,6 +30,6 @@
     <elements>
         <element name="Catalog" positionX="-54" positionY="90" width="128" height="134"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-        <element name="Product" positionX="-63" positionY="-9" width="128" height="224"/>
+        <element name="Product" positionX="-63" positionY="-9" width="128" height="14"/>
     </elements>
 </model>

@@ -1,50 +1,15 @@
-//
-//  BtnPay.swift
-//  Teriyaki
-//
-//  Created by dazn311 on 02.02.2023.
-//
-
 import SwiftUI
 
 struct BtnPay: View {
     @Environment(\.managedObjectContext) var moc
-    var prd: ProductFromCatalog? = nil
-//    var price = "0"
-    
+    var prd: ProductFromCatalog = ProductFromCatalog(id: "1", thumb: "https//teriyaki.su", name: "prdd", description: "dess", price: "10p", jan: "", sortOrder: "1", viewed: "1", categoryID: "70", rating: 2, href: "https//teriyaki.su")
+
     var body: some View {
         HStack {
             Button {
-                if let product = prd {
-                    let SoGalBi = Product(context: moc)
-                    SoGalBi.description2 = product.description
-                    SoGalBi.href = product.href
-                    SoGalBi.jan = product.jan
-                    SoGalBi.name = product.name
-                    SoGalBi.parentID = "70"
-                    SoGalBi.price = product.price
-                    SoGalBi.minimum = "0"
-                    SoGalBi.model = "ss"
-                    SoGalBi.productID = product.id
-                    SoGalBi.rating = Int16(product.rating)
-                    SoGalBi.special = false
-                    SoGalBi.tax = "0"
-                    SoGalBi.thumb = product.thumb
-
-
-                    do {
-                        try moc.save()
-                        print("moc save:")
-                    } catch {
-                        let nsError = error as NSError
-                        print("error2: \(nsError)")
-            //                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                    }
-                }
-//                                         parentId = catObj.category_id
-//                 print(catObj.categoryID)
+                    addPrd(prd: prd)
             } label: {
-                Text(transformPrice(price: prd?.price ?? "0"))
+                Text("\(prd.price)")
                     .badge(3)
                     .foregroundColor(Color(red: 255 / 255, green: 225 / 255, blue: 189 / 255)) // If you have this
                     .frame(maxHeight: 30)
@@ -53,7 +18,6 @@ struct BtnPay: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
                             .stroke(Color.white, lineWidth: 1))
-
             }
             .cornerRadius(4)         // You also need th
             .overlay(alignment: .topTrailing) {
@@ -93,17 +57,13 @@ struct BtnPay: View {
         SoGalBi.special = false
         SoGalBi.tax = "0"
         SoGalBi.thumb = prd.thumb
-
-
         do {
             try moc.save()
-            print("moc save:")
+            print("moc save: prd.price-\(prd.price)")
         } catch {
             let nsError = error as NSError
             print("error2: \(nsError)")
-//                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-
     }
 }
 

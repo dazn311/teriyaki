@@ -1,10 +1,3 @@
-//
-//  SearchPageView.swift
-//  Teriyaki
-//
-//  Created by dazn311 on 31.01.2023.
-//
-
 import SwiftUI
 
 struct SearchPageView: View {

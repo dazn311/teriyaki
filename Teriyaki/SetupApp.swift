@@ -38,3 +38,52 @@ struct AddToCart {
 }
 
 let newValue = UrlCart.init(add: AddToCart(route: "api/cart/add", productID: "57", quantity: "2"))
+
+
+//{urlCatalogShort = "/index.php?route=api/zstore3/catstoplevel"
+//    "cats": [
+//        {
+//            "name": "Корейская",
+//            "sort_order": "0",
+//            "category_id": "70"
+//        },
+//        {
+//            "name": "Японская",
+//            "sort_order": "2",
+//            "category_id": "67"
+//        },
+//        {
+//            "name": "Китайская",
+//            "sort_order": "3",
+//            "category_id": "77"
+//        }
+//    ],
+//    "ver": 4,
+//    "res": "ok"
+//}
+
+
+///{/index.php?route=api/category&path="
+//  "activecat": "70",
+//  "version": "1",
+//  "categories": [
+//    {
+//        "name": "Горячие на 2(3) персоны",
+//        "thumb": "https://teriyaki.su/image/cache/catalog/Korean/Hot%202%20person/sechuanski-0x0.jpg",
+//        "parent_id": "70",
+//        "category_id": "76",
+//        "sort_order": "2",
+//        "products": [
+//            {
+//                "product_id": "117",
+//                "thumb": "https://teriyaki.su/image/cache/catalog/Korean/Hot%202%20person/Kimchi-tim-300x200.jpg",
+//                "name": "Дэчжи кимчи тим",
+//                "description": "капуста кимчи, свинина, картофель.1500гр..",
+//                "price": "2900.0000",
+//                "jan": "spicy",
+//                "sort_order": "1",
+//                "viewed": "356",
+//                "category_id": "76",
+//                "rating": 0,
+//                "href": "http://teriyaki.su/index.php?route=product/product&path=70_76&product_id=117"
+//            },

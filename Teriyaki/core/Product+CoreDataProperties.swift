@@ -1,11 +1,3 @@
-//
-//  Product+CoreDataProperties.swift
-//  Teriyaki
-//
-//  Created by dazn311 on 27.01.2023.
-//
-//
-
 import Foundation
 import CoreData
 
@@ -44,7 +36,9 @@ extension Product {
         }else {
             return "https//teriyaki.su"
         }
-        
+    }
+    public var _thumb: String {
+        url;
     }
     public var wrappedDescription: String {
         if let desc = description2 {
@@ -65,7 +59,8 @@ extension Product {
     }
     
     public var wrapPrice: String {
-        let set = price != nil ? String(price!.dropLast()) : "0p"
+//        let set = price != nil ? String(price!.dropLast()) : "0p"
+        let set = price != nil ? String(price!) : "0p"
         
         return set
     }

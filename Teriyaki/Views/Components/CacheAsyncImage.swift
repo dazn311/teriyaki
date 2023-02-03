@@ -1,10 +1,3 @@
-//
-//  CacheAsyncImage.swift
-//  Teriyaki
-//
-//  Created by dazn311 on 25.01.2023.
-//
-
 import SwiftUI
 
 struct CacheAsyncImage<Content>: View where Content: View{
