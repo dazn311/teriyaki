@@ -12,26 +12,31 @@ struct TabMenuView: View {
         TabView {
             HomePage()
                 .tabItem {
-                    Label("Home", systemImage: "menucard")
+                    Label("Меню", systemImage: "menucard")
                 }
                 .id(1)
 //                .badge(2)
 
             SearchPageView()
                 .tabItem {
-                    Label("Search", systemImage: "list.bullet.circle")
+                    Label("Поиск", systemImage: "list.bullet.circle")
                 }
                 .id(2)
             CartPageView(filter: "parentID")
                 .tabItem {
-                    Label("Cart", systemImage: "bag")
+                    Label("Корзина", systemImage: "bag")
                 }
                 .id(3)
             FavoritePageView(filter: "parentID")
                 .tabItem {
-                    Label("Fav", systemImage: "heart.circle")
+                    Label("Избранные", systemImage: "heart.circle")
                 }
                 .id(4)
+            SettingPageView()
+                .tabItem {
+                    Label("Настройки", systemImage: "digitalcrown.arrow.clockwise")
+                }
+                .id(5)
         }
     }
 }

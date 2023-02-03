@@ -58,7 +58,7 @@ let newValue = UrlCart.init(add: AddToCart(route: "api/cart/add", productID: "57
 //            "category_id": "77"
 //        }
 //    ],
-//    "ver": 4,
+//    "version": 4,
 //    "res": "ok"
 //}
 
@@ -66,6 +66,7 @@ let newValue = UrlCart.init(add: AddToCart(route: "api/cart/add", productID: "57
 ///{/index.php?route=api/category&path="
 //  "activecat": "70",
 //  "version": "1",
+//  "res": "ok",
 //  "categories": [
 //    {
 //        "name": "Горячие на 2(3) персоны",

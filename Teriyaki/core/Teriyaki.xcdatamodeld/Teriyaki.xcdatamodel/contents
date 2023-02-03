@@ -27,9 +27,14 @@
         <attribute name="tax" optional="YES" attributeType="String"/>
         <attribute name="thumb" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="VersionDataEntity" representedClassName="VersionDataEntity" syncable="YES">
+        <attribute name="apiCategory" optional="YES" attributeType="String"/>
+        <attribute name="apiProducts" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Catalog" positionX="-54" positionY="90" width="128" height="134"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
         <element name="Product" positionX="-63" positionY="-9" width="128" height="14"/>
+        <element name="VersionDataEntity" positionX="-54" positionY="90" width="128" height="59"/>
     </elements>
 </model>

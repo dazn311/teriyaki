@@ -17,7 +17,9 @@ let prevDataCategories: [Category2] = [
     .init(level: "0", pathID: "70", sortOrder: "8", statuss: "1", parentID: "70", categoryID: "94", name: "Корейская кухня-Десерты"),
 ]
 
-
+class MockeData {
+    public static let productFromCatalog11: ProductFromCatalog = ProductFromCatalog(id: "1", thumb: "https//teriyaki.su", name: "prdd", description: "dess", price: "10p", jan: "", sortOrder: "1", viewed: "1", categoryID: "70", rating: 2, href: "https//teriyaki.su")
+}
 
 //let catArr = [
 //    {

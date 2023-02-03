@@ -56,7 +56,7 @@ struct HomePage: View {
             .padding(.horizontal,4)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    ToolbarHome(flag: $flag, searchText: $prdVM.searchTerm)
+                    ToolbarHome(withFlag: $flag, withSearchText: $prdVM.searchTerm)
 //                        .environmentObject(prdVM)
                 }
             }

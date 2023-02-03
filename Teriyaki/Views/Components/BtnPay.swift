@@ -1,8 +1,9 @@
 import SwiftUI
+import CoreData
 
 struct BtnPay: View {
     @Environment(\.managedObjectContext) var moc
-    var prd: ProductFromCatalog = ProductFromCatalog(id: "1", thumb: "https//teriyaki.su", name: "prdd", description: "dess", price: "10p", jan: "", sortOrder: "1", viewed: "1", categoryID: "70", rating: 2, href: "https//teriyaki.su")
+    var prd: ProductFromCatalog = MockeData.productFromCatalog11
 
     var body: some View {
         HStack {
@@ -43,27 +44,40 @@ struct BtnPay: View {
     }
     
     func addPrd(prd: ProductFromCatalog ) {
-        let SoGalBi = Product(context: moc)
-        SoGalBi.description2 = prd.description
-        SoGalBi.href = prd.href
-        SoGalBi.jan = prd.jan
-        SoGalBi.name = prd.name
-        SoGalBi.parentID = "70"
-        SoGalBi.price = prd.price
-        SoGalBi.minimum = "0"
-        SoGalBi.model = "ss"
-        SoGalBi.productID = prd.id
-        SoGalBi.rating = Int16(prd.rating)
-        SoGalBi.special = false
-        SoGalBi.tax = "0"
-        SoGalBi.thumb = prd.thumb
-        do {
-            try moc.save()
-            print("moc save: prd.price-\(prd.price)")
-        } catch {
-            let nsError = error as NSError
-            print("error2: \(nsError)")
+        if (isExist(productID: prd.id)) {
+            print("prd already have")
+        }else {
+            let SoGalBi = Product(context: moc)
+            SoGalBi.description2 = prd.description
+            SoGalBi.href = prd.href
+            SoGalBi.jan = prd.jan
+            SoGalBi.name = prd.name
+            SoGalBi.parentID = "70"
+            SoGalBi.price = prd.price
+            SoGalBi.minimum = "0"
+            SoGalBi.model = "ss"
+            SoGalBi.productID = prd.id
+            SoGalBi.rating = Int16(prd.rating)
+            SoGalBi.special = false
+            SoGalBi.tax = "0"
+            SoGalBi.thumb = prd.thumb
+            do {
+                try moc.save()
+                print("moc save: prd.price-\(prd.price)")
+            } catch {
+                let nsError = error as NSError
+                print("error2: \(nsError)")
+            }
         }
+        
+    }
+    
+    func isExist(productID: String) -> Bool {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Product")
+        fetchRequest.predicate = NSPredicate(format: "productID = %d", argumentArray: [productID])
+
+        let res = try! moc.fetch(fetchRequest)
+        return res.count > 0 ? true : false
     }
 }
 
@@ -72,3 +86,4 @@ struct BtnPay_Previews: PreviewProvider {
         BtnPay()
     }
 }
+

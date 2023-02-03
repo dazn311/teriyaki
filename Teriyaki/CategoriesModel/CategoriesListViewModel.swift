@@ -18,10 +18,12 @@ class CategoriesListViewModel: ObservableObject {
 
     var subscriptions = Set<AnyCancellable>()
     
-    func fetchCats(for searchTerm: String) {
+    func fetchCats(for searchTerm: String, version: Any, completion: @escaping(Int) -> Void) {
         guard data.count == 0 else {
             return
         }
+        
+        
         
         state = .fetching
         
@@ -31,6 +33,7 @@ class CategoriesListViewModel: ObservableObject {
                     case .success(let results):
                         self?.data = results.cats
                         self?.state = .fetched
+                        completion(results.version)
                     case .failure(let error):
                         print("58-error loading catalog: \(error)")
                         self?.state = .error(error.localizedDescription)

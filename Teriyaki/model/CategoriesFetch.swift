@@ -10,6 +10,8 @@ import Combine
 
 struct CategoriesFetch: Codable {
     let cats: [Category]
+    let version: Int
+    let res: String
 }
 
 

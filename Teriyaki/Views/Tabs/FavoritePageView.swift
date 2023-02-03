@@ -4,7 +4,7 @@ import SwiftUI
 struct FavoritePageView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest var fetchRequestPrd: FetchedResults<Product>
-    
+    //let fetchSet = Set(fetchResults)
     var body: some View {
         VStack {
             Text("Избранные")
@@ -25,6 +25,7 @@ struct FavoritePageView: View {
                                 .clipShape(Rectangle())
                                 
                             Text("\(prd.wrappedName)")
+                            //TODO: price get from net - actual version;
                             Text("\(prd.wrapPrice)")
                         }
                     }

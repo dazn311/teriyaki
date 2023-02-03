@@ -6,13 +6,24 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ToolbarHome: View {
+    @Environment(\.managedObjectContext) var moc
+    
     @EnvironmentObject var prdVM : ProductsListViewModel
     @EnvironmentObject var catsVM : CategoriesListViewModel
     
+    @FetchRequest var fetchRequestVersion: FetchedResults<VersionDataEntity>
+    
     @Binding var flag: Bool
     @Binding var searchText: String
+    
+    init(withFlag: Binding<Bool>, withSearchText: Binding<String>) {
+        _fetchRequestVersion = FetchRequest<VersionDataEntity>(sortDescriptors: [SortDescriptor(\.apiCategory)], predicate: nil)
+        self._flag = withFlag
+        self._searchText = withSearchText
+    }
 
     var body: some View {
         ZStack{
@@ -28,7 +39,15 @@ struct ToolbarHome: View {
                         case .initional:
                             Text("init")
                             .onAppear {
-                                catsVM.fetchCats(for: "/catstoplevel")
+                                for ver in fetchRequestVersion {
+                                    print("version apiCategory: \(ver.category)")
+                                }
+                                catsVM.fetchCats(for: "/catstoplevel", version: "3") {ver2 in
+                                    print("version from server: \(ver2)")
+                                    if isExist(version: ver2) {
+                                        print("good save")
+                                    }
+                                }
                             }
                         case .fetching:
                             Text("fetching...")
@@ -74,6 +93,8 @@ struct ToolbarHome: View {
         }
     }//end body
     
+    
+    
     private func callNumber(phoneNumber: String) {
         guard let url = URL(string: "telprompt://\(phoneNumber)"),
             UIApplication.shared.canOpenURL(url) else {
@@ -82,13 +103,35 @@ struct ToolbarHome: View {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
+    func isExist(version: Int) -> Bool {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "VersionDataEntity")
+//        fetchRequest.predicate = NSPredicate(format: "productID = %d", argumentArray: [productID])
+
+        let res = try! moc.fetch(fetchRequest)
+        print("108 res.count: \(res.count)")
+        
+        let v2 = VersionDataEntity(context: moc)
+        v2.apiCategory = String(version)
+        v2.apiProducts = "0"
+        
+        do {
+            try moc.save()
+            print("moc save: v2.apiCategory: \(version)")
+        } catch {
+            let nsError = error as NSError
+            print("119-error: \(nsError)")
+        }
+        
+        return res.count > 0 ? true : false
+    }
+    
 }
 
-struct ToolbarHome_Previews: PreviewProvider {
-    @State static var flag = false
-    @State static var searchText = ""
-    
-    static var previews: some View {
-        ToolbarHome(flag: $flag, searchText: $searchText)
-    }
-}
+//struct ToolbarHome_Previews: PreviewProvider {
+//    @State static var flag = false
+//    @State static var searchText = ""
+//
+//    static var previews: some View {
+//        ToolbarHome(flag: $flag, searchText: $searchText)
+//    }
+//}

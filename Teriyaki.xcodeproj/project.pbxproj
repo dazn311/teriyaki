@@ -37,6 +37,9 @@
 		C0B5978E2983A11500655878 /* prettyJSONString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B5978D2983A11500655878 /* prettyJSONString.swift */; };
 		C0B597902983B24D00655878 /* ProgressImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B5978F2983B24D00655878 /* ProgressImage.swift */; };
 		C0B597922983C57A00655878 /* SetupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B597912983C57A00655878 /* SetupApp.swift */; };
+		C0DFD0DE298D25880000B08C /* VersionDataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFD0DC298D25880000B08C /* VersionDataEntity+CoreDataClass.swift */; };
+		C0DFD0DF298D25880000B08C /* VersionDataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFD0DD298D25880000B08C /* VersionDataEntity+CoreDataProperties.swift */; };
+		C0DFD0E1298D3E9E0000B08C /* SettingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFD0E0298D3E9E0000B08C /* SettingPageView.swift */; };
 		C0E8F39829884C6400B39AD5 /* CatAndPrd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E8F39729884C6400B39AD5 /* CatAndPrd.swift */; };
 		C0E8F39B29891B6100B39AD5 /* BuyBtnStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E8F39A29891B6100B39AD5 /* BuyBtnStyle.swift */; };
 		C0E9814C298BFE3C00E77902 /* BtnPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9814B298BFE3C00E77902 /* BtnPay.swift */; };
@@ -78,6 +81,9 @@
 		C0B5978D2983A11500655878 /* prettyJSONString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prettyJSONString.swift; sourceTree = "<group>"; };
 		C0B5978F2983B24D00655878 /* ProgressImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressImage.swift; sourceTree = "<group>"; };
 		C0B597912983C57A00655878 /* SetupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupApp.swift; sourceTree = "<group>"; };
+		C0DFD0DC298D25880000B08C /* VersionDataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VersionDataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C0DFD0DD298D25880000B08C /* VersionDataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VersionDataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C0DFD0E0298D3E9E0000B08C /* SettingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPageView.swift; sourceTree = "<group>"; };
 		C0E8F39729884C6400B39AD5 /* CatAndPrd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatAndPrd.swift; sourceTree = "<group>"; };
 		C0E8F39A29891B6100B39AD5 /* BuyBtnStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyBtnStyle.swift; sourceTree = "<group>"; };
 		C0E9814B298BFE3C00E77902 /* BtnPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnPay.swift; sourceTree = "<group>"; };
@@ -169,9 +175,9 @@
 				C088FEF62980D65D005B18D2 /* HomePage.swift */,
 				C0AF1DF0298964760076D856 /* SearchPageView.swift */,
 				C0E9814D298C961F00E77902 /* CartPageView.swift */,
-				C0E9814F298C9E4E00E77902 /* Teriyaki.xcdatamodeld */,
 				C0E98153298CABFA00E77902 /* FavoritePageView.swift */,
 				C0E98155298CAC3300E77902 /* TabMenuView.swift */,
+				C0DFD0E0298D3E9E0000B08C /* SettingPageView.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -224,6 +230,9 @@
 		C0E98152298CA77800E77902 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				C0E9814F298C9E4E00E77902 /* Teriyaki.xcdatamodeld */,
+				C0DFD0DC298D25880000B08C /* VersionDataEntity+CoreDataClass.swift */,
+				C0DFD0DD298D25880000B08C /* VersionDataEntity+CoreDataProperties.swift */,
 				C02D5E7B2983D59800352C1D /* Product+CoreDataClass.swift */,
 				C02D5E7C2983D59800352C1D /* Product+CoreDataProperties.swift */,
 			);
@@ -310,6 +319,7 @@
 				C0AF1DF1298964760076D856 /* SearchPageView.swift in Sources */,
 				C0AF1DE729893DA30076D856 /* ApiError.swift in Sources */,
 				C088FEFC2980F99F005B18D2 /* MenuCuisine.swift in Sources */,
+				C0DFD0E1298D3E9E0000B08C /* SettingPageView.swift in Sources */,
 				C049DD96297E3FAB0077B87E /* ContentView.swift in Sources */,
 				C0B597902983B24D00655878 /* ProgressImage.swift in Sources */,
 				C088FEFE2980FD75005B18D2 /* ItemPrd.swift in Sources */,
@@ -321,6 +331,7 @@
 				C00197AE298B4623004B2029 /* Logo.swift in Sources */,
 				C088FF022981227A005B18D2 /* CacheAsyncImage.swift in Sources */,
 				C0AF1DE92989420A0076D856 /* CategoriesListViewModel.swift in Sources */,
+				C0DFD0DE298D25880000B08C /* VersionDataEntity+CoreDataClass.swift in Sources */,
 				C049DD94297E3FAB0077B87E /* TeriyakiApp.swift in Sources */,
 				C0B597922983C57A00655878 /* SetupApp.swift in Sources */,
 				C02D5E802983D8D000352C1D /* FilteredListPrd.swift in Sources */,
@@ -329,6 +340,7 @@
 				C02D5E7D2983D59800352C1D /* Product+CoreDataClass.swift in Sources */,
 				C088FF00298118F6005B18D2 /* ToolbarHome.swift in Sources */,
 				C0AF1DF32989690B0076D856 /* ProductsListViewModel.swift in Sources */,
+				C0DFD0DF298D25880000B08C /* VersionDataEntity+CoreDataProperties.swift in Sources */,
 				C0AF1DEB2989435D0076D856 /* FetchState.swift in Sources */,
 				C0AF1DEF29894C0A0076D856 /* StatusFetch.swift in Sources */,
 				C049DDA8297E796E0077B87E /* CategoryesHomeModel.swift in Sources */,
@@ -543,8 +555,7 @@
 				C0E98150298C9E4E00E77902 /* Teriyaki.xcdatamodel */,
 			);
 			currentVersion = C0E98150298C9E4E00E77902 /* Teriyaki.xcdatamodel */;
-			name = Teriyaki.xcdatamodeld;
-			path = ../../Teriyaki.xcdatamodeld;
+			path = Teriyaki.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
