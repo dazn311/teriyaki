@@ -39,9 +39,7 @@ struct ToolbarHome: View {
                         case .initional:
                             Text("init")
                             .onAppear {
-                                for ver in fetchRequestVersion {
-                                    print("version apiCategory: \(ver.category)")
-                                }
+                                
                                 catsVM.fetchCats(for: "/catstoplevel", version: "3") {ver2 in
                                     print("version from server: \(ver2)")
                                     if isExist(version: ver2) {
@@ -104,25 +102,39 @@ struct ToolbarHome: View {
     }
     
     func isExist(version: Int) -> Bool {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "VersionDataEntity")
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "VersionDataEntity")
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "VersionDataEntity", sortDescriptors: [SortDescriptor(\.apiCategory)], predicate: true)
 //        fetchRequest.predicate = NSPredicate(format: "productID = %d", argumentArray: [productID])
 
-        let res = try! moc.fetch(fetchRequest)
-        print("108 res.count: \(res.count)")
+//        let res = try! moc.fetch(fetchRequest)
+//        print("108 res.count: \(res.count)")
         
-        let v2 = VersionDataEntity(context: moc)
-        v2.apiCategory = String(version)
-        v2.apiProducts = "0"
-        
-        do {
-            try moc.save()
-            print("moc save: v2.apiCategory: \(version)")
-        } catch {
-            let nsError = error as NSError
-            print("119-error: \(nsError)")
+        var tmpVersion = 0
+        for ver in fetchRequestVersion {
+            print("version apiCategory: \(ver.category)")
+            if tmpVersion < Int(ver.category)! {
+                tmpVersion = Int(ver.category)!
+            }
         }
         
-        return res.count > 0 ? true : false
+        if tmpVersion < version {
+            let v2 = VersionDataEntity(context: moc)
+            v2.apiCategory = String(version)
+            v2.apiProducts = "0"
+            
+            do {
+                try moc.save()
+                print("moc save: v2.apiCategory: \(version)")
+            } catch {
+                let nsError = error as NSError
+                print("119-error: \(nsError)")
+            }
+            return true
+        } else {
+            return false
+        }
+        
+//        return res.count > 0 ? true : false
     }
     
 }
