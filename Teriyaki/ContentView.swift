@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-
+    @Environment(\.managedObjectContext) private var viewContext
     var body: some View {
 
         TabView {
@@ -22,6 +22,10 @@ struct ContentView: View {
             SearchPageView()
                 .tabItem {
                     Label("Search", systemImage: "list.bullet.circle")
+                }
+            CartPageView(filter: "parentID")
+                .tabItem {
+                    Label("Cart", systemImage: "bag")
                 }
         }
     }

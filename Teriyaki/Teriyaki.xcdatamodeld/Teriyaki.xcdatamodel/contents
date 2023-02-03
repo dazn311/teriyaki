@@ -13,19 +13,19 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="Product" representedClassName="Product" syncable="YES">
-        <attribute name="description2" attributeType="String"/>
-        <attribute name="href" attributeType="String"/>
-        <attribute name="jan" attributeType="String"/>
-        <attribute name="minimum" attributeType="String"/>
-        <attribute name="model" attributeType="String"/>
-        <attribute name="name" attributeType="String"/>
-        <attribute name="parentID" attributeType="String"/>
-        <attribute name="price" attributeType="String"/>
-        <attribute name="productID" attributeType="String"/>
+        <attribute name="description2" optional="YES" attributeType="String"/>
+        <attribute name="href" optional="YES" attributeType="String"/>
+        <attribute name="jan" optional="YES" attributeType="String"/>
+        <attribute name="minimum" optional="YES" attributeType="String"/>
+        <attribute name="model" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="parentID" optional="YES" attributeType="String"/>
+        <attribute name="price" optional="YES" attributeType="String"/>
+        <attribute name="productID" optional="YES" attributeType="String"/>
         <attribute name="rating" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="special" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="tax" attributeType="String"/>
-        <attribute name="thumb" attributeType="String"/>
+        <attribute name="tax" optional="YES" attributeType="String"/>
+        <attribute name="thumb" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="Catalog" positionX="-54" positionY="90" width="128" height="134"/>

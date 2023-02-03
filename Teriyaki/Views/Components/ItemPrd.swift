@@ -8,80 +8,82 @@ import UIKit
 import SwiftUI
 
 struct ItemPrd: View {
-    var id = "1"
-    var name = "test"
-    var pic = ""
-    var describe = ""
-    var price = "0"
+    @Environment(\.managedObjectContext) private var viewContext
+    var product: ProductFromCatalog? = nil
     var isShowPrice: Bool = false
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 1) {
-    //            Text("id: \(id)")
-                CacheAsyncImage(id: id, url: URL(string: pic)!) { AsyncImagePhase in
-                    switch AsyncImagePhase {
-                            case .success(let image):
-                                image
-                                .resizable()
-                                .scaledToFit()
-                            case .empty:
-                                Image(systemName: "sleep")
-                                .resizable()
-                                .clipped()
-                            case .failure(_):
-                                Image(systemName: "power.dotted")
-                                .resizable()
-                                .clipped()
-                            @unknown default:
-                                Image("\(id)")
-                                .resizable()
-                                .clipped()
-                            }
-                    
-                }
-                
-                
-                VStack(alignment: .leading, spacing: 0) {
-                    Text("\(name)")
-                        .foregroundColor(Color(red: 205 / 255, green: 91 / 255, blue: 15 / 255)) // If you have this
-                        .frame(maxWidth: .infinity, minHeight: 40, alignment: .topLeading)
-                        .padding(.horizontal,0)
-                    Text(transformDescribe(describe: describe))
-                        .foregroundColor(Color.gray)
-                        .padding(.horizontal,0)
-                        .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80, alignment: .topLeading)
-                        .lineLimit(3)
+        if let prd = product {
+            
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 1) {
+        //            Text("id: \(id)")
+                    CacheAsyncImage(id: prd.id, url: URL(string: prd.thumb)!) { AsyncImagePhase in
+                        switch AsyncImagePhase {
+                                case .success(let image):
+                                    image
+                                    .resizable()
+                                    .scaledToFit()
+                                case .empty:
+                                    Image(systemName: "sleep")
+                                    .resizable()
+                                    .clipped()
+                                case .failure(_):
+                                    Image(systemName: "power.dotted")
+                                    .resizable()
+                                    .clipped()
+                                @unknown default:
+                                    Image("\(prd.id)")
+                                    .resizable()
+                                    .clipped()
+                                }
+                        
+                    }
                     
                     
-                }
-                .frame(minHeight: 128, maxHeight: 128, alignment: .leading)
-                if isShowPrice {
-                    BtnPay(price: price)
-                }
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("\(prd.name)")
+                            .foregroundColor(Color(red: 205 / 255, green: 91 / 255, blue: 15 / 255)) // If you have this
+                            .frame(maxWidth: .infinity, minHeight: 40, alignment: .topLeading)
+                            .padding(.horizontal,0)
+                        Text(transformDescribe(describe: prd.description))
+                            .foregroundColor(Color.gray)
+                            .padding(.horizontal,0)
+                            .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80, alignment: .topLeading)
+                            .lineLimit(3)
+                        
+                        
+                    }
+                    .frame(minHeight: 128, maxHeight: 128, alignment: .leading)
 
+    //                    BtnPay(price: price)
+                    BtnPay(prd: prd)
+                        .environment(\.managedObjectContext, viewContext)
+
+
+                }
+                Spacer()
             }
-            Spacer()
         }
     }
 }
 
-struct ItemPrd_Previews: PreviewProvider {
-    static let name = "Гункан тигровая креветка спайси"
-    static let pic = "https://teriyaki.su/image/cache/catalog/Japan/Gunkan/gunkan-krevetka-300x200.png"
-    static let describe = "рёбра говяжьи, лапша стеклянная, бульон говяжий.Подается с рисом400г.."
-    static let price = "210P"
-    
-    static var previews: some View {
-        HStack {
-            ItemPrd(name: name, pic: pic, describe: describe, price: price)
-        }
-        .frame(width: 360, height: 500)
-        .padding(.horizontal,4)
-        .border(Color.green)
-        
-    }
-}
+//struct ItemPrd_Previews: PreviewProvider {
+//    static let name = "Гункан тигровая креветка спайси"
+//    static let pic = "https://teriyaki.su/image/cache/catalog/Japan/Gunkan/gunkan-krevetka-300x200.png"
+//    static let describe = "рёбра говяжьи, лапша стеклянная, бульон говяжий.Подается с рисом400г.."
+//    static let price = "210P"
+//    
+//    static var previews: some View {
+//        HStack {
+//            ItemPrd(name: name, pic: pic, describe: describe, price: price)
+//        }
+//        .frame(width: 360, height: 500)
+//        .padding(.horizontal,4)
+//        .border(Color.green)
+//        
+//    }
+//}
 
 let imageCache = NSCache<NSString, AnyObject>()
 

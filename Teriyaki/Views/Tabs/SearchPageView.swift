@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchPageView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var prdVM : ProductsListViewModel
     
     private var columns: [GridItem] = [GridItem(spacing: 4, alignment: .center),GridItem(spacing: 4, alignment: .center)]
@@ -33,7 +34,9 @@ struct SearchPageView: View {
                                                 .foregroundColor(Color.indigo)
                                             
                                             ForEach(categ.products,  id: \.id) { prd in
-                                                NavigationLink(destination: ItemPrd(id: prd.id,name: prd.name, pic: prd.thumb, describe: prd.description, price: prd.price, isShowPrice: true))
+                                                NavigationLink(destination: ItemPrd(product: prd, isShowPrice: true)
+                                                    .environment(\.managedObjectContext, viewContext)
+                                                )
                                                 {
                                                     Text(prd.name)
                                                     .foregroundColor(Color.gray)

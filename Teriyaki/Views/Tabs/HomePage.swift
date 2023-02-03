@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomePage: View {
 //    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var prdVM : ProductsListViewModel
     
     private var columns: [GridItem] = [GridItem(spacing: 4, alignment: .center),GridItem(spacing: 4, alignment: .center)]
@@ -34,10 +35,11 @@ struct HomePage: View {
                                     LazyVGrid(columns: columns, spacing: 0) {
                                                 ForEach(categ.products,  id: \.id) { prdObj in
                                                     VStack(spacing: 0) {
-                                                        NavigationLink(destination: ItemPrd(id: prdObj.id ,name: prdObj.name, pic: prdObj.thumb, describe: prdObj.description, price: prdObj.price, isShowPrice: true)) {
-                                                            ItemPrd(id: prdObj.id ,name: prdObj.name, pic: prdObj.thumb, describe: prdObj.description, price: prdObj.price, isShowPrice: false)
+                                                        NavigationLink(destination: ItemPrd(product: prdObj, isShowPrice: true)) {
+                                                            ItemPrd(product: prdObj, isShowPrice: false)
                                                         }
-                                                        BtnPay(price: prdObj.price)
+//                                                        BtnPay(price: prdObj.price)
+//                                                        BtnPay(moc: _viewContext, prd: prdObj, price: prdObj.price)
                                                     }
                                                 }
                                     }//end lazyVGrid

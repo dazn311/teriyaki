@@ -31,11 +31,21 @@ extension Product {
     @NSManaged public var thumb: String?
     
     public var wrappedDescription: String {
-        String(description2!.split(separator: ".").first ?? "")
+        if let desc = description2 {
+            return String(desc.split(separator: ".").first ?? "")
+        }else {
+            return ""
+        }
+        
     }
     
     public var wrappedDescriptionKg: String {
-        String(description2!.split(separator: ".").last ?? "")
+        if let desc = description2 {
+            return String(desc.split(separator: ".").last ?? "")
+        }else {
+            return ""
+        }
+        
     }
     
     public var wrapPrice: String {
