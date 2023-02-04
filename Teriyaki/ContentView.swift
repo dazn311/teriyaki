@@ -14,6 +14,7 @@ struct ContentView: View {
     @FetchRequest var fetchRequestVersion: FetchedResults<VersionDataEntity>
     
     @EnvironmentObject var catsVM: CategoriesListViewModel
+    @EnvironmentObject var prdVM : ProductsListViewModel
 //    @State private var isCatData: Bool = false
     
     init() {
@@ -102,6 +103,8 @@ struct ContentView: View {
         }
         catsVM.data = array
         catsVM.state = .fetched
+        
+        prdVM.parentId = array[0].categoryID
 //        print("[46] set to catsVM.data")
     }
 //        return res.count > 0 ? true : false

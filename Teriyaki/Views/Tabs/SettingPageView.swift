@@ -14,41 +14,55 @@ struct SettingPageView: View {
     @FetchRequest var versionEntity: FetchedResults<VersionDataEntity>
     @FetchRequest var catLevelEntity: FetchedResults<CatLevelEntity>
     
+    @State var isShowInfo: Bool = false
+    
     var body: some View {
-        VStack(spacing: 10) {
-            Text("Версия программы")
-            
-            List(["Версии"], id: \.self) { cat in
-                Section(cat) {
-                    ForEach(versionEntity, id: \.self) { ver2 in
-                        HStack {
-                            Text("кухни v.\(ver2.category)")
+        ZStack {
+            VStack(spacing: 2) {
+                Text("Версия программы")
+                
+                List(["Версии"], id: \.self) { cat in
+                    Section(cat) {
+                        ForEach(versionEntity, id: \.self) { ver2 in
+                            HStack {
+                                Text("кухни v.\(ver2.category)")
+                            }
+                        }
+                        .onDelete { IndexSet in
+                            print("del: \(IndexSet)")
+                            self.deleteVersion(offesets: IndexSet)
+                            self.deleteAllCatCore()
+                            self.isShowInfo = true
                         }
                     }
-                    .onDelete { IndexSet in
-                        print("del: \(IndexSet)")
-                        self.deleteVersion(offesets: IndexSet)
-                        self.deleteAllCatCore()
-                    }
                 }
-            }
-            .frame(height: 100)
-            List(["Кухни"], id: \.self) { cat in
-                Section(cat) {
-                    ForEach(catLevelEntity, id: \.self) { catLevel in
-                        HStack {
-                            Text("\(catLevel.name)")
+                .frame(height: 100)
+                List(["Кухни"], id: \.self) { cat in
+                    Section(cat) {
+                        ForEach(catLevelEntity, id: \.self) { catLevel in
+                            HStack {
+                                Text("\(catLevel.name)")
+                            }
+                        }
+                        .onDelete { IndexSet in
+                            print("del: \(IndexSet)")
+                            self.deleteCatCore(offesets: IndexSet)
+                            self.isShowInfo = true
                         }
                     }
-                    .onDelete { IndexSet in
-                        print("del: \(IndexSet)")
-                        self.deleteCatCore(offesets: IndexSet)
-//                        self.deleteCatCore(cats: Array(catLevelEntity), offesets: IndexSet)
-                    }
                 }
+                .frame(height: 300)
+                Spacer()
             }
-            .frame(height: 300)
-            Spacer()
+            if isShowInfo {
+                VStack {
+                    Spacer()
+                    Text("Чтобы изменения вступили в действие")
+                    Text("нужно перезагрузить приложение")
+                }
+                .foregroundColor(Color.red)
+                .padding()
+            }
         }
     }
     
