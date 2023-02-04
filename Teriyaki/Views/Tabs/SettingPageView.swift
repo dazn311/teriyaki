@@ -9,8 +9,11 @@ import SwiftUI
 
 struct SettingPageView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var catsVM : CategoriesListViewModel
+    
     @FetchRequest var versionEntity: FetchedResults<VersionDataEntity>
     @FetchRequest var catLevelEntity: FetchedResults<CatLevelEntity>
+    
     var body: some View {
         VStack(spacing: 10) {
             Text("Версия программы")
@@ -19,12 +22,13 @@ struct SettingPageView: View {
                 Section(cat) {
                     ForEach(versionEntity, id: \.self) { ver2 in
                         HStack {
-                            Text("версия категории: \(ver2.category)")
+                            Text("кухни v.\(ver2.category)")
                         }
                     }
                     .onDelete { IndexSet in
                         print("del: \(IndexSet)")
-                        self.deleteTodo(prds: Array(versionEntity), offesets: IndexSet)
+                        self.deleteVersion(offesets: IndexSet)
+                        self.deleteAllCatCore()
                     }
                 }
             }
@@ -38,10 +42,12 @@ struct SettingPageView: View {
                     }
                     .onDelete { IndexSet in
                         print("del: \(IndexSet)")
-                        self.deleteTodo(prds: Array(versionEntity), offesets: IndexSet)
+                        self.deleteCatCore(offesets: IndexSet)
+//                        self.deleteCatCore(cats: Array(catLevelEntity), offesets: IndexSet)
                     }
                 }
             }
+            .frame(height: 300)
             Spacer()
         }
     }
@@ -51,10 +57,37 @@ struct SettingPageView: View {
         _catLevelEntity = FetchRequest<CatLevelEntity>(sortDescriptors: [], predicate: nil)
     }
     
-    func deleteTodo(prds: [VersionDataEntity], offesets: IndexSet){
+    private func deleteVersion(offesets: IndexSet){
         for index in offesets {
-          let prd = prds[index]
-            viewContext.delete(prd)
+          let prd = versionEntity[index]
+          viewContext.delete(prd)
+        }
+        try? viewContext.save()
+    }
+    private func deleteAllVersion(){
+        for ver2 in versionEntity {
+          viewContext.delete(ver2)
+        }
+        try? viewContext.save()
+    }
+    
+    private func deleteCatCore(offesets: IndexSet){
+        for index in offesets {
+          let prd = catLevelEntity[index]
+          viewContext.delete(prd)
+        }
+        print("catLevelEntity count:\(catLevelEntity.count) ")
+        if catLevelEntity.count == 1 {
+            //if delete last then del ver;
+            deleteAllVersion()
+            
+        }
+        try? viewContext.save()
+    }
+    
+    private func deleteAllCatCore(){
+        for cat2 in catLevelEntity {
+            viewContext.delete(cat2)
         }
         try? viewContext.save()
     }
