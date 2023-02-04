@@ -13,7 +13,7 @@ class ProductsListViewModel: ObservableObject {
 
     @Published var searchTerm: String = ""
     @Published var dataArr: PrdAndCatData = PrdAndCatData()
-    @Published var parentId: String = "70"
+    @Published var parentId: String = "0"
     
     @Published var state: StatusFetch = .initional
 
@@ -22,8 +22,10 @@ class ProductsListViewModel: ObservableObject {
     init() {
         $parentId
             .sink { [weak self] parId in
-                self?.state = .fetching
-                self?.fetchPrds(for: parId)
+                if parId != "0" {
+                  self?.state = .fetching
+                  self?.fetchPrds(for: parId)
+                }
         }.store(in: &subscriptions)
     }
     

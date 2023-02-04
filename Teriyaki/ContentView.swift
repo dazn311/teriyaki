@@ -31,6 +31,7 @@ struct ContentView: View {
                 } else {
                     catsVM.fetchCats(for: "/catstoplevel", version: 3) {ver2 in
 //                        print("fetchCats version: \(ver2)")
+                        prdVM.parentId = catsVM.data[0].categoryID
                         if isExist(fetchVersion: ver2) {
 //                            print("good save")
                             setDataToCatCore()
