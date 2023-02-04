@@ -44,7 +44,10 @@ struct SearchPageView: View {
                         case .initional:
                             Text("init")
                         case .fetching:
-                            Text("fetching...")
+                            VStack {
+                                ProgressView()
+                                Text("fetching...")
+                            }
                         case .error(_):
                             Text("all")
                             .foregroundColor(Color.pink)

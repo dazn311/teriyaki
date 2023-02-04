@@ -18,7 +18,7 @@ class CategoriesListViewModel: ObservableObject {
 
     var subscriptions = Set<AnyCancellable>()
     
-    func fetchCats(for searchTerm: String, version: Any, completion: @escaping(Int) -> Void) {
+    func fetchCats(for searchTerm: String, version: Int = 0, completion: @escaping(Int) -> Void) {
         guard data.count == 0 else {
             return
         }
@@ -31,9 +31,17 @@ class CategoriesListViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                     case .success(let results):
-                        self?.data = results.cats
                         self?.state = .fetched
-                        completion(results.version)
+                    
+//                        let serverVer = results.version
+                        if (results.version > version) {
+                            self?.data = results.cats
+                            completion(results.version)
+                        }
+                    
+                        
+                        
+                        
                     case .failure(let error):
                         print("58-error loading catalog: \(error)")
                         self?.state = .error(error.localizedDescription)

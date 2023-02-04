@@ -19,6 +19,8 @@
 		C049DD9D297E3FAC0077B87E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049DD9C297E3FAC0077B87E /* Persistence.swift */; };
 		C049DDA8297E796E0077B87E /* CategoryesHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049DDA7297E796E0077B87E /* CategoryesHomeModel.swift */; };
 		C049DDAB297E7FF30077B87E /* CatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049DDAA297E7FF30077B87E /* CatListView.swift */; };
+		C052E8B1298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052E8AF298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift */; };
+		C052E8B2298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052E8B0298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift */; };
 		C08782C3297F7EBC0086CDAB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08782C2297F7EBC0086CDAB /* SearchBar.swift */; };
 		C088FEF72980D65D005B18D2 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088FEF62980D65D005B18D2 /* HomePage.swift */; };
 		C088FEF92980D830005B18D2 /* MockeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088FEF82980D830005B18D2 /* MockeData.swift */; };
@@ -63,6 +65,8 @@
 		C049DD9C297E3FAC0077B87E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C049DDA7297E796E0077B87E /* CategoryesHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryesHomeModel.swift; sourceTree = "<group>"; };
 		C049DDAA297E7FF30077B87E /* CatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatListView.swift; sourceTree = "<group>"; };
+		C052E8AF298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatLevelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C052E8B0298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatLevelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C08782C2297F7EBC0086CDAB /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		C088FEF62980D65D005B18D2 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		C088FEF82980D830005B18D2 /* MockeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockeData.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 		C0E98152298CA77800E77902 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				C052E8AF298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift */,
+				C052E8B0298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift */,
 				C0E9814F298C9E4E00E77902 /* Teriyaki.xcdatamodeld */,
 				C0DFD0DC298D25880000B08C /* VersionDataEntity+CoreDataClass.swift */,
 				C0DFD0DD298D25880000B08C /* VersionDataEntity+CoreDataProperties.swift */,
@@ -319,6 +325,7 @@
 				C0AF1DF1298964760076D856 /* SearchPageView.swift in Sources */,
 				C0AF1DE729893DA30076D856 /* ApiError.swift in Sources */,
 				C088FEFC2980F99F005B18D2 /* MenuCuisine.swift in Sources */,
+				C052E8B2298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift in Sources */,
 				C0DFD0E1298D3E9E0000B08C /* SettingPageView.swift in Sources */,
 				C049DD96297E3FAB0077B87E /* ContentView.swift in Sources */,
 				C0B597902983B24D00655878 /* ProgressImage.swift in Sources */,
@@ -328,6 +335,7 @@
 				C0B5978E2983A11500655878 /* prettyJSONString.swift in Sources */,
 				C02D5E7E2983D59800352C1D /* Product+CoreDataProperties.swift in Sources */,
 				C088FEF92980D830005B18D2 /* MockeData.swift in Sources */,
+				C052E8B1298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift in Sources */,
 				C00197AE298B4623004B2029 /* Logo.swift in Sources */,
 				C088FF022981227A005B18D2 /* CacheAsyncImage.swift in Sources */,
 				C0AF1DE92989420A0076D856 /* CategoriesListViewModel.swift in Sources */,

@@ -19,19 +19,19 @@ extension VersionDataEntity {
     @NSManaged public var apiCategory: String?
     @NSManaged public var apiProducts: String?
     
-    public var category: String {
+    public var category: Int {
         if let cat2 = apiCategory {
-            return String(cat2)
+            return Int(cat2)!
         }else {
-            return "2"
+            return 2
         }
     }
     
-    public var product: String {
+    public var product: Int {
         if let prd2 = apiProducts {
-            return String(prd2)
+            return Int(prd2)!
         }else {
-            return "2"
+            return 2
         }
     }
 

@@ -10,8 +10,9 @@ import SwiftUI
 struct SettingPageView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest var versionEntity: FetchedResults<VersionDataEntity>
+    @FetchRequest var catLevelEntity: FetchedResults<CatLevelEntity>
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             Text("Версия программы")
             
             List(["Версии"], id: \.self) { cat in
@@ -27,11 +28,27 @@ struct SettingPageView: View {
                     }
                 }
             }
+            .frame(height: 100)
+            List(["Кухни"], id: \.self) { cat in
+                Section(cat) {
+                    ForEach(catLevelEntity, id: \.self) { catLevel in
+                        HStack {
+                            Text("\(catLevel.name)")
+                        }
+                    }
+                    .onDelete { IndexSet in
+                        print("del: \(IndexSet)")
+                        self.deleteTodo(prds: Array(versionEntity), offesets: IndexSet)
+                    }
+                }
+            }
+            Spacer()
         }
     }
     
     init() {
         _versionEntity = FetchRequest<VersionDataEntity>(sortDescriptors: [SortDescriptor(\.apiCategory)], predicate: nil)
+        _catLevelEntity = FetchRequest<CatLevelEntity>(sortDescriptors: [], predicate: nil)
     }
     
     func deleteTodo(prds: [VersionDataEntity], offesets: IndexSet){

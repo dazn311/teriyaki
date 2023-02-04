@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Catalog" representedClassName="Catalog" syncable="YES">
+    <entity name="CatLevelEntity" representedClassName="CatLevelEntity" syncable="YES">
         <attribute name="categoryID" attributeType="String"/>
-        <attribute name="level" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
-        <attribute name="parentID" attributeType="String"/>
-        <attribute name="pathID" optional="YES" attributeType="String"/>
         <attribute name="sortOrder" attributeType="String"/>
-        <attribute name="statuss" attributeType="String"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -32,7 +28,7 @@
         <attribute name="apiProducts" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Catalog" positionX="-54" positionY="90" width="128" height="134"/>
+        <element name="CatLevelEntity" positionX="-54" positionY="90" width="128" height="74"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
         <element name="Product" positionX="-63" positionY="-9" width="128" height="14"/>
         <element name="VersionDataEntity" positionX="-54" positionY="90" width="128" height="59"/>
