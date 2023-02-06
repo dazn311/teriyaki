@@ -21,6 +21,7 @@
 		C049DDAB297E7FF30077B87E /* CatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049DDAA297E7FF30077B87E /* CatListView.swift */; };
 		C052E8B1298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052E8AF298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift */; };
 		C052E8B2298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052E8B0298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift */; };
+		C06F3B5B2991332800F9B062 /* TabStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F3B5A2991332800F9B062 /* TabStateManager.swift */; };
 		C07C98AE298FC67D003A4AFF /* EntityBaseFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C98AD298FC67D003A4AFF /* EntityBaseFunc.swift */; };
 		C07C98B12990AD26003A4AFF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C98B02990AD26003A4AFF /* Extensions.swift */; };
 		C07C98B42990C140003A4AFF /* ThemeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C98B32990C140003A4AFF /* ThemeApp.swift */; };
@@ -71,6 +72,7 @@
 		C049DDAA297E7FF30077B87E /* CatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatListView.swift; sourceTree = "<group>"; };
 		C052E8AF298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatLevelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C052E8B0298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatLevelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C06F3B5A2991332800F9B062 /* TabStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStateManager.swift; sourceTree = "<group>"; };
 		C07C98AD298FC67D003A4AFF /* EntityBaseFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityBaseFunc.swift; sourceTree = "<group>"; };
 		C07C98B02990AD26003A4AFF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C07C98B32990C140003A4AFF /* ThemeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeApp.swift; sourceTree = "<group>"; };
@@ -145,7 +147,7 @@
 				C0E8F39629884C4200B39AD5 /* model */,
 				C0B5978C2983A0FC00655878 /* helpers */,
 				C049DDA9297E7FE20077B87E /* Views */,
-				C049DDA6297E794B0077B87E /* CategoriesModel */,
+				C049DDA6297E794B0077B87E /* Models */,
 				C049DD97297E3FAC0077B87E /* Assets.xcassets */,
 				C049DD99297E3FAC0077B87E /* Preview Content */,
 				C0B597912983C57A00655878 /* SetupApp.swift */,
@@ -162,15 +164,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		C049DDA6297E794B0077B87E /* CategoriesModel */ = {
+		C049DDA6297E794B0077B87E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				C049DDA7297E796E0077B87E /* CategoryesHomeModel.swift */,
 				C088FEF82980D830005B18D2 /* MockeData.swift */,
 				C0AF1DE82989420A0076D856 /* CategoriesListViewModel.swift */,
 				C0AF1DF22989690B0076D856 /* ProductsListViewModel.swift */,
+				C06F3B5A2991332800F9B062 /* TabStateManager.swift */,
 			);
-			path = CategoriesModel;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C049DDA9297E7FE20077B87E /* Views */ = {
@@ -392,6 +395,7 @@
 				C02D5E802983D8D000352C1D /* FilteredListPrd.swift in Sources */,
 				C0E98154298CABFA00E77902 /* FavoritePageView.swift in Sources */,
 				C0E9814C298BFE3C00E77902 /* BtnPay.swift in Sources */,
+				C06F3B5B2991332800F9B062 /* TabStateManager.swift in Sources */,
 				C02D5E7D2983D59800352C1D /* Product+CoreDataClass.swift in Sources */,
 				C088FF00298118F6005B18D2 /* ToolbarHome.swift in Sources */,
 				C0AF1DF32989690B0076D856 /* ProductsListViewModel.swift in Sources */,

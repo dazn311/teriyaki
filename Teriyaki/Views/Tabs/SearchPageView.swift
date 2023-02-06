@@ -55,6 +55,7 @@ struct SearchPageView: View {
                 }
             }
             .padding(.horizontal,4)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     ToolbarHome(withFlag: $flag, withSearchText: $prdVM.searchTerm)

@@ -19,10 +19,9 @@ struct HomePage: View {
     @State var offset: CGPoint = .zero
 
     var body: some View {
-        
         NavigationView {
-            VStack {
-//                Image("101")
+            VStack(spacing: 0) {
+//                Text("gesdf")
                 ScrollView(showsIndicators: false) {
                     if prdVM.state == .fetched {
                         if let catss = prdVM.dataArr[prdVM.parentId] {
@@ -31,7 +30,6 @@ struct HomePage: View {
                                     Text(categ.name)
                                         .foregroundColor(Color.indigo)
 
-//                                    let col = searchProducts.count > 1 ? columns : columnsSingel
                                     LazyVGrid(columns: columns, spacing: 0) {
                                                 ForEach(categ.products,  id: \.id) { prdObj in
                                                     VStack(spacing: 0) {
@@ -43,7 +41,6 @@ struct HomePage: View {
                                                     }
                                                 }
                                     }//end lazyVGrid
-                                    
                                 }
                             }
                             .listStyle(.plain)
@@ -52,15 +49,20 @@ struct HomePage: View {
                         EmptyView()
                     }
                 }
+                Spacer()
             }
             .padding(.horizontal,4)
+//            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+//            .navigationBarHidden(true)
             .toolbar {
+                #if os(iOS)
                 ToolbarItem(placement: .principal) {
                     ToolbarHome(withFlag: $flag, withSearchText: $prdVM.searchTerm)
-//                        .environmentObject(prdVM)
                 }
+                #endif
             }
-            Spacer()
+            
         }//end navigation
     }
 }
@@ -72,19 +74,22 @@ private let itemFormatter: DateFormatter = {
     return formatter
 }()
 
-struct HomePage_Previews: PreviewProvider {
-    static let categoriesVM : ProductsListViewModel = {
-       let categoriesVM = ProductsListViewModel()
-        return categoriesVM
-    }()
-    
-    static var previews: some View {
-        ContentView()
-            .environment(\.colorScheme, .dark)
-            .environmentObject(categoriesVM)
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
-}
+//struct HomePage_Previews: PreviewProvider {
+//    static let prdVM : ProductsListViewModel = {
+//       let prdVM = ProductsListViewModel()
+//        prdVM.parentId = "70"
+//        let catAndPrd: CatAndPrd = CatAndPrd(name: "sdf", thumb: "dsf", parentID: "70", id: "1", sortOrder: "1", products: [])
+//        prdVM.dataArr = ["70": [catAndPrd]]
+//        return prdVM
+//    }()
+//
+//    static var previews: some View {
+//        ContentView()
+//            .environment(\.colorScheme, .dark)
+//            .environmentObject(prdVM)
+//            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//    }
+//}
     
     
     

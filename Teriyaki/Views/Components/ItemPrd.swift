@@ -19,11 +19,11 @@ struct ItemPrd: View {
                                     .resizable()
                                     .scaledToFit()
                                 case .empty:
-                                    Image(systemName: "sleep")
+                                    Image("\(prd.id)")
                                     .resizable()
                                     .clipped()
                                 case .failure(_):
-                                    Image(systemName: "power.dotted")
+                                    Image("\(prd.id)")
                                     .resizable()
                                     .clipped()
                                 @unknown default:
@@ -71,28 +71,26 @@ struct ItemPrd: View {
                 }
                 
             }
-//          .zIndex(1)
-            .ignoresSafeArea(.all, edges: .top)
         }
     }
 }
 
-//struct ItemPrd_Previews: PreviewProvider {
-//    static let name = "Гункан тигровая креветка спайси"
-//    static let pic = "https://teriyaki.su/image/cache/catalog/Japan/Gunkan/gunkan-krevetka-300x200.png"
-//    static let describe = "рёбра говяжьи, лапша стеклянная, бульон говяжий.Подается с рисом400г.."
-//    static let price = "210P"
-//    
-//    static var previews: some View {
-//        HStack {
-//            ItemPrd(name: name, pic: pic, describe: describe, price: price)
-//        }
-//        .frame(width: 360, height: 500)
-//        .padding(.horizontal,4)
-//        .border(Color.green)
-//        
-//    }
-//}
+struct ItemPrd_Previews: PreviewProvider {
+    static let name = "Гункан тигровая креветка спайси"
+    static let pic = "https://teriyaki.su/image/cache/catalog/Japan/Gunkan/gunkan-krevetka-300x200.png"
+    static let describe = "рёбра говяжьи, лапша стеклянная, бульон говяжий.Подается с рисом400г.."
+    static let price = "210P"
+    
+    static var previews: some View {
+        HStack {
+            ItemPrd(product: ProductFromCatalog(id: "1", thumb: "https://teriyaki.su/image/cache/catalog/Japan/Gunkan/gunkan-krevetka-300x200.png", name: "Гункан тигровая креветка спайси", description: describe, price: price, jan: "", sortOrder: "1", viewed: "", categoryID: "70", rating: 3, href: ""), isShowPrice: true)
+        }
+        .frame(width: 360, height: 500)
+        .padding(.horizontal,4)
+        .border(Color.green)
+        
+    }
+}
 
 let imageCache = NSCache<NSString, AnyObject>()
 

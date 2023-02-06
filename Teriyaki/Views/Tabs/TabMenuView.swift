@@ -9,39 +9,59 @@ import SwiftUI
 
 struct TabMenuView: View {
     let appearance: UITabBarAppearance = UITabBarAppearance()
+    
+    @StateObject var tabStateManager: TabStateManager = TabStateManager()
+    @State private var shouldShowMenu = true
     init() {
         UITabBar.appearance().scrollEdgeAppearance = appearance
         UITabBar.appearance().backgroundColor = .black
     }
     var body: some View {
-        TabView {
-            HomePage()
-                .tabItem {
-                    Label("Меню", systemImage: "menucard")
-                }
-                .id(1)
-//                .badge(2)
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            TabView {
+                HomePage()
+                    .tabItem {
+                        Label("Меню", systemImage: "menucard")
+                    }
+                    .id(1)
+    //                .badge(2)
 
-            SearchPageView()
-                .tabItem {
-                    Label("Поиск", systemImage: "list.bullet.circle")
+                SearchPageView()
+                    .tabItem {
+                        Label("Поиск", systemImage: "list.bullet.circle")
+                    }
+                    .id(2)
+                CartPageView(filter: "parentID")
+                    .tabItem {
+                        Label("Корзина", systemImage: "bag")
+                    }
+                    .id(3)
+                FavoritePageView(filter: "parentID")
+                    .tabItem {
+                        Label("Избранные", systemImage: "heart.circle")
+                    }
+                    .id(4)
+                SettingPageView()
+                    .tabItem {
+                        Label("Настройки", systemImage: "digitalcrown.arrow.clockwise")
+                    }
+                    .id(5)
+            }
+        } else {
+            NavigationView {
+                List {
+                    NavigationLink("Меню", destination: HomePage(), isActive: $shouldShowMenu)
+                    NavigationLink("Поиск", destination: SearchPageView())
+                    NavigationLink("Корзина", destination: CartPageView(filter: "parentID"))
+                    NavigationLink("Избранные", destination: FavoritePageView(filter: "parentID"))
+                    NavigationLink("Настройки", destination: SettingPageView())
+                    
                 }
-                .id(2)
-            CartPageView(filter: "parentID")
-                .tabItem {
-                    Label("Корзина", systemImage: "bag")
-                }
-                .id(3)
-            FavoritePageView(filter: "parentID")
-                .tabItem {
-                    Label("Избранные", systemImage: "heart.circle")
-                }
-                .id(4)
-            SettingPageView()
-                .tabItem {
-                    Label("Настройки", systemImage: "digitalcrown.arrow.clockwise")
-                }
-                .id(5)
+                .navigationTitle("Teriyaki")
+                
+                Text("Select a Cuisine") // A placeholder to show before selection.
+            }
         }
     }
 }
