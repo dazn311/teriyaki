@@ -18,6 +18,7 @@ struct SearchBar: View {
                 Button("✖︎") {
                     withAnimation(.spring()) {
                         searchText = ""
+                        UIApplication.shared.endEditing()
                         flag = false
                         
                     }

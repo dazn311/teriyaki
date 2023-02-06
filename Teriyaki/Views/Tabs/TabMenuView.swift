@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct TabMenuView: View {
+    let appearance: UITabBarAppearance = UITabBarAppearance()
+    init() {
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+        UITabBar.appearance().backgroundColor = .black
+    }
     var body: some View {
         TabView {
             HomePage()

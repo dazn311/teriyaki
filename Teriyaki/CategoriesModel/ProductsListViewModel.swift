@@ -7,9 +7,12 @@
 
 import Foundation
 import Combine
+import CoreData
 
 class ProductsListViewModel: ObservableObject {
+    
     private let service = APIService()
+    @Published var dataCoreArr: [Product] = []
 
     @Published var searchTerm: String = ""
     @Published var dataArr: PrdAndCatData = PrdAndCatData()
@@ -27,6 +30,16 @@ class ProductsListViewModel: ObservableObject {
                   self?.fetchPrds(for: parId)
                 }
         }.store(in: &subscriptions)
+        
+//        let context = PersistenceController.shared.container.viewContext
+//        let request = Product.fetchRequest()
+        
+//        do {
+//            dataCoreArr = try context.fetch(request)
+//            print("error, need implimation resArr: \(dataCoreArr)")
+//        }catch {
+//            print("[40] error: \(error)")
+//        }
     }
     
     func fetchPrds(for searchTerm: String) {
@@ -42,4 +55,20 @@ class ProductsListViewModel: ObservableObject {
             }
         }
     }
+    
+    func loadQuestion(viewContext: NSManagedObjectContext) -> NSArray{
+            let fetchRequest: NSFetchRequest<Product> = Product.fetchRequest()
+
+            do {
+                let array = try PersistenceController.shared.container.viewContext.fetch(fetchRequest) as NSArray
+                guard array.count > 0 else { print("[EHY!] Non ci sono elementi da leggere "); return array }
+
+                return array
+            } catch let errore {
+                print("error FetchRequest: \(errore)")
+            }
+
+            return []
+    }
+    
 }

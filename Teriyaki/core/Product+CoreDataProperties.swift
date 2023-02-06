@@ -68,6 +68,23 @@ extension Product {
 //    var wrappedDescriptionKg: String {
 //        "\(String(describing: (description2 != nil) ? description2!.split(separator: ".").last : "0 g") )"
 //    }
+    
+    static func delete(at offset: IndexSet, for items: [Product]) {
+        if let first = items.first, let viewContext = first.managedObjectContext {
+            offset.map{ items[$0] }.forEach { data in
+                viewContext.delete(data)
+            }
+        }
+    }
+    
+    static func deleteAll(for items: [Product]) {
+        if let first = items.first, let viewContext = first.managedObjectContext {
+            for ver2 in items {
+              viewContext.delete(ver2)
+            }
+        }
+    }
+    
 }
 
 extension Product : Identifiable {

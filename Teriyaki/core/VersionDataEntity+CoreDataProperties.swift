@@ -34,6 +34,22 @@ extension VersionDataEntity {
             return 2
         }
     }
+    
+    static func delete(at offset: IndexSet, for items: [VersionDataEntity]) {
+        if let first = items.first, let viewContext = first.managedObjectContext {
+            offset.map{ items[$0] }.forEach { data in
+                viewContext.delete(data)
+            }
+        }
+    }
+    
+    static func deleteAll(for items: [VersionDataEntity]) {
+        if let first = items.first, let viewContext = first.managedObjectContext {
+            for ver2 in items {
+              viewContext.delete(ver2)
+            }
+        }
+    }
 
 }
 

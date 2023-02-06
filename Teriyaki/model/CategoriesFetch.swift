@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreData
 
 struct CategoriesFetch: Codable {
     let cats: [Category]
@@ -26,7 +27,20 @@ struct Category: Codable {
     }
 }
 
+public func loadCatCore(viewContext: NSManagedObjectContext) -> NSArray{
+        let fetchRequest: NSFetchRequest<CatLevelEntity> = CatLevelEntity.fetchRequest()
 
+        do {
+            let array = try viewContext.fetch(fetchRequest) as NSArray
+            guard array.count > 0 else { print("[EHY!] Non ci sono elementi da leggere "); return array }
+
+            return array
+        } catch let errore {
+            print("error FetchRequest: \(errore)")
+        }
+
+        return []
+}
 //    {
 //        "cats": [
 //            {

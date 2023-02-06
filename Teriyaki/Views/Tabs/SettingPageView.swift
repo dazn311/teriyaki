@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingPageView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var catsVM : CategoriesListViewModel
+//    @EnvironmentObject var catsVM : CategoriesListViewModel
     
     @FetchRequest var versionEntity: FetchedResults<VersionDataEntity>
     @FetchRequest var catLevelEntity: FetchedResults<CatLevelEntity>
@@ -19,10 +19,10 @@ struct SettingPageView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 2) {
-                Text("Версия программы")
+                Text("Настройки")
                 
-                List(["Версии"], id: \.self) { cat in
-                    Section(cat) {
+                List([" "], id: \.self) { cat in
+                    Section("Версия каталога") {
                         ForEach(versionEntity, id: \.self) { ver2 in
                             HStack {
                                 Text("кухни v.\(ver2.category)")
@@ -35,10 +35,7 @@ struct SettingPageView: View {
                             self.isShowInfo = true
                         }
                     }
-                }
-                .frame(height: 100)
-                List(["Кухни"], id: \.self) { cat in
-                    Section(cat) {
+                    Section("список доступной Кухни") {
                         ForEach(catLevelEntity, id: \.self) { catLevel in
                             HStack {
                                 Text("\(catLevel.name)")
@@ -51,14 +48,13 @@ struct SettingPageView: View {
                         }
                     }
                 }
-                .frame(height: 300)
                 Spacer()
             }
             if isShowInfo {
                 VStack {
                     Spacer()
-                    Text("Чтобы изменения вступили в действие")
-                    Text("нужно перезагрузить приложение")
+                    Text("Чтобы изменения вступили в силу")
+                    Text("- перезагрузите приложение")
                 }
                 .foregroundColor(Color.red)
                 .padding()
@@ -71,38 +67,47 @@ struct SettingPageView: View {
         _catLevelEntity = FetchRequest<CatLevelEntity>(sortDescriptors: [], predicate: nil)
     }
     
-    private func deleteVersion(offesets: IndexSet){
-        for index in offesets {
-          let prd = versionEntity[index]
-          viewContext.delete(prd)
-        }
-        try? viewContext.save()
+
+}
+
+struct SettingPageView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingPageView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
-    private func deleteAllVersion(){
-        for ver2 in versionEntity {
-          viewContext.delete(ver2)
+}
+
+extension SettingPageView {
+    private func deleteVersion(offesets: IndexSet){
+        withAnimation {
+            VersionDataEntity.delete(at: offesets, for: Array(versionEntity))
+            PersistenceController.shared.save()
         }
-        try? viewContext.save()
+    }
+    
+    private func deleteAllVersion(){
+        withAnimation {
+            VersionDataEntity.deleteAll(for: Array(versionEntity))
+            PersistenceController.shared.save()
+        }
     }
     
     private func deleteCatCore(offesets: IndexSet){
-        for index in offesets {
-          let prd = catLevelEntity[index]
-          viewContext.delete(prd)
-        }
-        print("catLevelEntity count:\(catLevelEntity.count) ")
         if catLevelEntity.count == 1 {
             //if delete last then del ver;
             deleteAllVersion()
-            
         }
-        try? viewContext.save()
+        withAnimation {
+            CatLevelEntity.delete(at: offesets,for: Array(catLevelEntity))
+            PersistenceController.shared.save()
+        }
+        
     }
     
     private func deleteAllCatCore(){
-        for cat2 in catLevelEntity {
-            viewContext.delete(cat2)
+        withAnimation {
+            CatLevelEntity.deleteAll(for: Array(catLevelEntity))
+            PersistenceController.shared.save()
         }
-        try? viewContext.save()
     }
 }

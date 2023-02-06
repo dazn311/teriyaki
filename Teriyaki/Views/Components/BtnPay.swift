@@ -12,13 +12,15 @@ struct BtnPay: View {
             } label: {
                 Text("\(prd.price)")
                     .badge(3)
-                    .foregroundColor(Color(red: 255 / 255, green: 225 / 255, blue: 189 / 255)) // If you have this
+                    .foregroundColor(ThemeApp.gold) // If you have this
                     .frame(maxHeight: 30)
                     .padding(.horizontal,16)
                     .padding(.vertical, 2)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color.white, lineWidth: 1))
+//                    .background(Capsule(style: .circular).stroke(Color.gray, lineWidth: 1.0))
+//                    .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1.0))
+                    .clipped()
+                
+                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(ThemeApp.gold, lineWidth: 1))
             }
             .cornerRadius(4)         // You also need th
             .overlay(alignment: .topTrailing) {
@@ -83,7 +85,11 @@ struct BtnPay: View {
 
 struct BtnPay_Previews: PreviewProvider {
     static var previews: some View {
-        BtnPay()
+        Group {
+            BtnPay()
+            BtnPay()
+                .preferredColorScheme(.dark)
+        }
     }
 }
 

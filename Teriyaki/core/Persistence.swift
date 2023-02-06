@@ -17,6 +17,22 @@ struct PersistenceController {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
         }
+//        for cuisine in ["Korea", "Japan", "China"] {
+//            let cat23 = CatLevelEntity(context: viewContext)
+//            cat23.categoryID = "70"
+//            cat23.sortOrder = "0"
+//            cat23.name = cuisine
+//        }
+        for cuisine in [Category(name: "Korea", sortOrder: "0", categoryID: "70"), Category(name: "Japan", sortOrder: "1", categoryID: "67"), Category(name: "China", sortOrder: "2", categoryID: "77")].sorted(by: { $0.sortOrder > $1.sortOrder}) {
+            let cat23 = CatLevelEntity(context: viewContext)
+            cat23.categoryID = "70"
+            cat23.sortOrder = "0"
+            cat23.name = cuisine.name
+        }
+        let version23 = VersionDataEntity(context: viewContext)
+        version23.apiCategory = "4"
+        version23.apiProducts = "4"
+        
         do {
             try viewContext.save()
         } catch {
@@ -52,5 +68,16 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    func save() {
+        let viewContext = container.viewContext
+        
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("[64] PersistenceController-save, Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
 }

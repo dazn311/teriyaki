@@ -31,7 +31,7 @@ struct ContentView: View {
                 } else {
                     catsVM.fetchCats(for: "/catstoplevel", version: 3) {ver2 in
 //                        print("fetchCats version: \(ver2)")
-                        prdVM.parentId = catsVM.data[0].categoryID
+                        prdVM.parentId = catsVM.categoryID
                         if isExist(fetchVersion: ver2) {
 //                            print("good save")
                             setDataToCatCore()
@@ -67,13 +67,7 @@ struct ContentView: View {
             v2.apiCategory = String(fetchVersion)
             v2.apiProducts = "0"
             
-            do {
-                try viewContext.save()
-                print("moc save: v2.apiCategory: \(fetchVersion)")
-            } catch {
-                let nsError = error as NSError
-                print("91-error: \(nsError)")
-            }
+            PersistenceController.shared.save()
             return true
         }
         return true
@@ -85,14 +79,14 @@ struct ContentView: View {
             c2.name = cat.name
             c2.categoryID = cat.categoryID
             c2.sortOrder = cat.sortOrder
-            
-            do {
-                try viewContext.save()
-//                print("moc save from catsVM.data")
-            } catch {
-                let nsError = error as NSError
-                print("110-error: \(nsError)")
-            }
+            PersistenceController.shared.save()
+//            do {
+//                try viewContext.save()
+////                print("moc save from catsVM.data")
+//            } catch {
+//                let nsError = error as NSError
+//                print("110-error: \(nsError)")
+//            }
         }
         
     }
@@ -105,7 +99,7 @@ struct ContentView: View {
         catsVM.data = array
         catsVM.state = .fetched
         
-        prdVM.parentId = array[0].categoryID
+        prdVM.parentId = catsVM.data[0].categoryID
 //        print("[46] set to catsVM.data")
     }
 //        return res.count > 0 ? true : false

@@ -58,6 +58,21 @@ struct ItemPrd: View {
                 }
                 Spacer()
             }
+            .onAppear {
+                if isShowPrice {
+                    Tool.hideTabBar()
+                }
+            }
+            .onDisappear {
+                withAnimation {
+                    if isShowPrice {
+                     Tool.showTabBar()
+                    }
+                }
+                
+            }
+//          .zIndex(1)
+            .ignoresSafeArea(.all, edges: .top)
         }
     }
 }
