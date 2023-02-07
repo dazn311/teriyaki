@@ -27,20 +27,23 @@ struct HomePage: View {
                         if let catss = prdVM.dataArr[prdVM.parentId] {
                             LazyVStack {
                                 ForEach(catss,  id: \.id) { categ in
-                                    Text(categ.name)
-                                        .foregroundColor(Color.indigo)
+                                    Section(categ.name){
+//                                    Text(categ.name)
+//                                        .foregroundColor(Color.indigo)
 
                                     LazyVGrid(columns: columns, spacing: 0) {
                                                 ForEach(categ.products,  id: \.id) { prdObj in
                                                     VStack(spacing: 0) {
-                                                        NavigationLink(destination: ItemPrd(product: prdObj, isShowPrice: true)) {
-                                                            ItemPrd(product: prdObj, isShowPrice: false)
-                                                        }
+                                                        PrdPreviewView(product: prdObj, catID: categ.id, isShowPrice: true)
+//                                                        NavigationLink(destination: ItemPrd(product: prdObj, isShowPrice: true)) {
+//                                                            ItemPrd(product: prdObj, isShowPrice: false)
+//                                                        }
 //                                                        BtnPay(price: prdObj.price)
 //                                                        BtnPay(moc: _viewContext, prd: prdObj, price: prdObj.price)
                                                     }
                                                 }
                                     }//end lazyVGrid
+                                }
                                 }
                             }
                             .listStyle(.plain)
@@ -52,18 +55,22 @@ struct HomePage: View {
                 Spacer()
             }
             .padding(.horizontal,4)
-//            .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
-//            .navigationBarHidden(true)
             .toolbar {
                 #if os(iOS)
                 ToolbarItem(placement: .principal) {
                     ToolbarHome(withFlag: $flag, withSearchText: $prdVM.searchTerm)
                 }
                 #endif
+                // add scrool bottom menu for show status;
+//                ToolbarItem(placement: .status) {
+//                    Text("status").padding(4)
+//                }
             }
             
+            
         }//end navigation
+        .accentColor(ThemeApp.gold)
     }
 }
 

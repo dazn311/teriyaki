@@ -11,7 +11,7 @@ struct Logo: View {
     @Binding var flag: Bool
     @StateObject private var motion = MotionManager()
     
-    private let heightLogo = CGFloat(36)
+    private let heightLogo = CGFloat(40)
     
     var body: some View {
             withAnimation(.spring()) {
@@ -20,8 +20,8 @@ struct Logo: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: flag == false ? heightLogo : 0, height: flag == false ? heightLogo : 0)
                     .clipShape(Circle())
-                    .offset(x: 0, y: motion.y * (-10))
-                    .shadow(color: .gray.opacity(0.3), radius: 5, x: motion.x * 5, y:  motion.y * 5 - 5)
+//                    .offset(x: 0, y: motion.y * (-15))
+//                    .shadow(color: .gray.opacity(0.3), radius: 15, x: motion.x * 5, y:  motion.y * 5 - 5)
 //                    .foregroundStyle(
 //                        .red.shadow(color: .black, radius: 10, x: motion.x * 10, y:  motion.y * 10)
 //                        .shadow(color: .black.opacity(0.2), radius: 10, x: motion.x * 10, y:  motion.y * 10)

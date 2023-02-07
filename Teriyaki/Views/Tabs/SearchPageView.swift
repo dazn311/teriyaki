@@ -27,7 +27,7 @@ struct SearchPageView: View {
                                                 .foregroundColor(Color.indigo)
                                             
                                             ForEach(categ.products,  id: \.id) { prd in
-                                                NavigationLink(destination: ItemPrd(product: prd, isShowPrice: true)
+                                                NavigationLink(destination: ItemPrd(product: prd, catID: categ.id, isShowPrice: true)
                                                     .environment(\.managedObjectContext, viewContext)
                                                 )
                                                 {
@@ -64,6 +64,7 @@ struct SearchPageView: View {
             }
             Spacer()
         }//end navigation
+        .accentColor(ThemeApp.gold)
     }
 }
 

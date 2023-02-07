@@ -32,7 +32,7 @@ struct TabMenuView: View {
                         Label("Поиск", systemImage: "list.bullet.circle")
                     }
                     .id(2)
-                CartPageView(filter: "parentID")
+                CartPageView()
                     .tabItem {
                         Label("Корзина", systemImage: "bag")
                     }
@@ -53,7 +53,7 @@ struct TabMenuView: View {
                 List {
                     NavigationLink("Меню", destination: HomePage(), isActive: $shouldShowMenu)
                     NavigationLink("Поиск", destination: SearchPageView())
-                    NavigationLink("Корзина", destination: CartPageView(filter: "parentID"))
+                    NavigationLink("Корзина", destination: CartPageView())
                     NavigationLink("Избранные", destination: FavoritePageView(filter: "parentID"))
                     NavigationLink("Настройки", destination: SettingPageView())
                     

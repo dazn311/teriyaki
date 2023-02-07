@@ -40,6 +40,16 @@ extension Product {
     public var _thumb: String {
         url;
     }
+    
+    public var wrappedThumb: String {
+        get {
+            thumb ?? "**"
+        }
+        set {
+            thumb = newValue
+        }
+    }
+    
     public var wrappedDescription: String {
         if let desc = description2 {
             return String(desc.split(separator: ".").first ?? "")

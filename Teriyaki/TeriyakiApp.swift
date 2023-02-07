@@ -15,12 +15,13 @@ struct TeriyakiApp: App {
     
     @StateObject var prdVM = ProductsListViewModel()
     @StateObject var catsVM = CategoriesListViewModel()
-    
+    @StateObject var cartVM: CartViewModel = CartViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(prdVM)
                 .environmentObject(catsVM)
+                .environmentObject(cartVM)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .onChange(of: ScenePhase) { phase in

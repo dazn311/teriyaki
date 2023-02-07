@@ -1,25 +1,23 @@
 import SwiftUI
 
 struct CartPageView: View {
-    @FetchRequest var fetchRequestPrd: FetchedResults<Product>
+    @EnvironmentObject var cartVM : CartViewModel
     
     var body: some View {
         VStack {
-            Text("CartPage")
-            
-            List(fetchRequestPrd, id: \.self) { prd in
-                Section(prd.wrappedName) {
-                    Text("\(prd.wrappedName)")
-                }
+            Text("Корзина")
+            List(cartVM.data, id: \.id) { cart in
+                Text("\(cart.name)")
+            }
+            if cartVM.totals.count > 0 {
+                Text("\(cartVM.data.count) товаров на сумму: \(cartVM.totals[0].text)")
             }
         }
     }
     
-    init(filter: String) {
-        _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [], predicate: nil)
-//        _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [], predicate: NSPredicate(format: "parentID BEGINSWITH %@", filter))
-
-    }
+//    init(filter: String) {
+//        _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [], predicate: nil)
+//    }
 }
 
 //struct CartPageView_Previews: PreviewProvider {

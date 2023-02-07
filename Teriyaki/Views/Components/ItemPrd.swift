@@ -4,36 +4,34 @@ import SwiftUI
 struct ItemPrd: View {
     @Environment(\.managedObjectContext) private var viewContext
     var product: ProductFromCatalog? = nil
+    var catID: String = ""
     var isShowPrice: Bool = false
     
     var body: some View {
         if let prd = product {
-            
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 1) {
-        //            Text("id: \(id)")
                     CacheAsyncImage(id: prd.id, url: URL(string: prd.thumb)!) { AsyncImagePhase in
                         switch AsyncImagePhase {
-                                case .success(let image):
-                                    image
-                                    .resizable()
-                                    .scaledToFit()
-                                case .empty:
-                                    Image("\(prd.id)")
-                                    .resizable()
-                                    .clipped()
-                                case .failure(_):
-                                    Image("\(prd.id)")
-                                    .resizable()
-                                    .clipped()
-                                @unknown default:
-                                    Image("\(prd.id)")
-                                    .resizable()
-                                    .clipped()
-                                }
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        case .empty:
+                            Image("\(prd.id)")
+                                .resizable()
+                                .clipped()
+                        case .failure(_):
+                            Image("\(prd.id)")
+                                .resizable()
+                                .clipped()
+                        @unknown default:
+                            Image("\(prd.id)")
+                                .resizable()
+                                .clipped()
+                        }
                         
                     }
-                    
                     
                     VStack(alignment: .leading, spacing: 0) {
                         Text("\(prd.name)")
@@ -46,15 +44,17 @@ struct ItemPrd: View {
                             .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80, alignment: .topLeading)
                             .lineLimit(3)
                         
-                        
                     }
                     .frame(minHeight: 128, maxHeight: 128, alignment: .leading)
-
-    //                    BtnPay(price: price)
-                    BtnPay(prd: prd)
+                    
+                    BtnPay(prd: prd, catID: catID)
                         .environment(\.managedObjectContext, viewContext)
-
-
+                }
+                .toolbar {
+                    ToolbarItem {
+                        BtnFavorite(prd: prd, catID: catID)
+                            .environment(\.managedObjectContext, viewContext)
+                    }
                 }
                 Spacer()
             }
@@ -66,7 +66,7 @@ struct ItemPrd: View {
             .onDisappear {
                 withAnimation {
                     if isShowPrice {
-                     Tool.showTabBar()
+                        Tool.showTabBar()
                     }
                 }
                 
@@ -92,7 +92,7 @@ struct ItemPrd_Previews: PreviewProvider {
     }
 }
 
-let imageCache = NSCache<NSString, AnyObject>()
+//let imageCache = NSCache<NSString, AnyObject>()
 
 
 func transformDescribe(describe: String)-> String {
@@ -111,44 +111,3 @@ func transformPrice(price: String)-> String {
     }
     return "\(price)p"
 }
-
-
-//extension UIImageView {
-//    func loadImageUsingCache(withUrl urlString : String) {
-//        let url = URL(string: urlString)
-//        self.image = nil
-//
-//        // check cached image
-//        if let cachedImage = imageCache.object(forKey: urlString as NSString) as? UIImage {
-//            self.image = cachedImage
-//            return
-//        }
-//
-//        // if not, download image from url
-//        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-//            if error != nil {
-//                print(error!)
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//                if let image = UIImage(data: data!) {
-//                    imageCache.setObject(image, forKey: urlString as NSString)
-//                    self.image = image
-//                }
-//            }
-//
-//        }).resume()
-//    }
-//}
-
-//AsyncImage(url: URL(string: pic)) { image in
-//        image
-//            .resizable()
-//            .scaledToFill()
-//            .clipped()
-//    } placeholder: {
-//        ZStack {
-//            ProgressImage()
-//        }
-//    }

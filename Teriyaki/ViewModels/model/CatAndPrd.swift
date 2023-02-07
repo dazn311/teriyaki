@@ -53,3 +53,69 @@ struct PrdAndCatFetch: Codable {
 typealias PrdAndCatData = [String: [CatAndPrd]]
 
 //let prevPrdAndCatData: PrdAndCatData = ["70": [CatAndPrd(name: "sdf", thumb: "df", parentID: "70", id: "93", sortOrder: "1", products: [ProductFromCatalog(id: "23", thumb: "sdf", name: "ddd", description: "sss", price: "222", jan: "spicy", sortOrder: "3", viewed: "1", categoryID: "12", rating: 1, href: "23eddd")])],)]
+
+//MARK: for POST add to cart;
+
+struct PrdFetchQuery: Codable {
+    let keyQuery: String //productID
+    let valQuery: String //quantity
+}
+
+struct AddToCartRequest: Codable {
+    let success: String //productID
+    let res: String //quantity
+}
+//{
+//    "success": "Success: You have modified your shopping cart!",
+//    "res": "ok"
+//}
+
+
+struct CartPrd: Codable, Identifiable {
+    let id: String
+    let productID: String
+    let name, model, quantity, price, total: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "cart_id"
+        case productID = "product_id"
+        case name, model, quantity, price, total
+    }
+}
+
+struct CartTotal: Codable {
+    let title, text: String
+}
+
+struct CartFetch: Codable {
+    let products: [CartPrd]
+    let totals: [CartTotal]
+}
+
+//{
+//    "products": [
+//        {
+//            "cart_id": "4302",
+//            "product_id": "57",
+//            "name": "Роллы классика лосось спайси",
+//            "model": "Роллы",
+//            "option": [],
+//            "quantity": "2",
+//            "stock": true,
+//            "shipping": "1",
+//            "price": "360P",
+//            "total": "720P",
+//            "reward": 0
+//        }
+//    ],
+//    "totals": [
+//        {
+//            "title": "Сумма",
+//            "text": "720P"
+//        },
+//        {
+//            "title": "Итого",
+//            "text": "720P"
+//        }
+//    ]
+//}

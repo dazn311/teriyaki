@@ -25,7 +25,7 @@ class ProductsListViewModel: ObservableObject {
     init() {
         $parentId
             .sink { [weak self] parId in
-                if parId != "0" {
+                if parId != "0" && ((self?.dataArr[parId]?.isEmpty) == nil) {
                   self?.state = .fetching
                   self?.fetchPrds(for: parId)
                 }

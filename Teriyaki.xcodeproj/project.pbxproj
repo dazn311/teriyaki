@@ -22,6 +22,10 @@
 		C052E8B1298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052E8AF298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift */; };
 		C052E8B2298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052E8B0298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift */; };
 		C06F3B5B2991332800F9B062 /* TabStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F3B5A2991332800F9B062 /* TabStateManager.swift */; };
+		C06F3B5D299184F800F9B062 /* PrdPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F3B5C299184F800F9B062 /* PrdPreviewView.swift */; };
+		C06F3B5F299195A700F9B062 /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F3B5E299195A700F9B062 /* StatusBarView.swift */; };
+		C06F3B6129922EF200F9B062 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F3B6029922EF200F9B062 /* CartViewModel.swift */; };
+		C06F3B63299242BA00F9B062 /* BtnFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F3B62299242BA00F9B062 /* BtnFavorite.swift */; };
 		C07C98AE298FC67D003A4AFF /* EntityBaseFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C98AD298FC67D003A4AFF /* EntityBaseFunc.swift */; };
 		C07C98B12990AD26003A4AFF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C98B02990AD26003A4AFF /* Extensions.swift */; };
 		C07C98B42990C140003A4AFF /* ThemeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C98B32990C140003A4AFF /* ThemeApp.swift */; };
@@ -73,6 +77,10 @@
 		C052E8AF298D63D800D38E13 /* CatLevelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatLevelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C052E8B0298D63D800D38E13 /* CatLevelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatLevelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C06F3B5A2991332800F9B062 /* TabStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStateManager.swift; sourceTree = "<group>"; };
+		C06F3B5C299184F800F9B062 /* PrdPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrdPreviewView.swift; sourceTree = "<group>"; };
+		C06F3B5E299195A700F9B062 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
+		C06F3B6029922EF200F9B062 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		C06F3B62299242BA00F9B062 /* BtnFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnFavorite.swift; sourceTree = "<group>"; };
 		C07C98AD298FC67D003A4AFF /* EntityBaseFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityBaseFunc.swift; sourceTree = "<group>"; };
 		C07C98B02990AD26003A4AFF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C07C98B32990C140003A4AFF /* ThemeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeApp.swift; sourceTree = "<group>"; };
@@ -137,17 +145,16 @@
 		C049DD92297E3FAB0077B87E /* Teriyaki */ = {
 			isa = PBXGroup;
 			children = (
+				C049DD93297E3FAB0077B87E /* TeriyakiApp.swift */,
+				C049DD95297E3FAB0077B87E /* ContentView.swift */,
 				C07C98B52990E8A7003A4AFF /* Tools */,
 				C07C98B22990C122003A4AFF /* constants */,
 				C07C98AF2990ACFC003A4AFF /* Extensions */,
 				C0E98152298CA77800E77902 /* core */,
-				C049DD93297E3FAB0077B87E /* TeriyakiApp.swift */,
-				C049DD95297E3FAB0077B87E /* ContentView.swift */,
 				C0E8F39929891B4500B39AD5 /* styling */,
-				C0E8F39629884C4200B39AD5 /* model */,
 				C0B5978C2983A0FC00655878 /* helpers */,
 				C049DDA9297E7FE20077B87E /* Views */,
-				C049DDA6297E794B0077B87E /* Models */,
+				C049DDA6297E794B0077B87E /* ViewModels */,
 				C049DD97297E3FAC0077B87E /* Assets.xcassets */,
 				C049DD99297E3FAC0077B87E /* Preview Content */,
 				C0B597912983C57A00655878 /* SetupApp.swift */,
@@ -164,16 +171,18 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		C049DDA6297E794B0077B87E /* Models */ = {
+		C049DDA6297E794B0077B87E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				C0E8F39629884C4200B39AD5 /* model */,
 				C049DDA7297E796E0077B87E /* CategoryesHomeModel.swift */,
 				C088FEF82980D830005B18D2 /* MockeData.swift */,
 				C0AF1DE82989420A0076D856 /* CategoriesListViewModel.swift */,
 				C0AF1DF22989690B0076D856 /* ProductsListViewModel.swift */,
 				C06F3B5A2991332800F9B062 /* TabStateManager.swift */,
+				C06F3B6029922EF200F9B062 /* CartViewModel.swift */,
 			);
-			path = Models;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		C049DDA9297E7FE20077B87E /* Views */ = {
@@ -242,6 +251,9 @@
 				C0B5978F2983B24D00655878 /* ProgressImage.swift */,
 				C00197AD298B4623004B2029 /* Logo.swift */,
 				C0E9814B298BFE3C00E77902 /* BtnPay.swift */,
+				C06F3B62299242BA00F9B062 /* BtnFavorite.swift */,
+				C06F3B5C299184F800F9B062 /* PrdPreviewView.swift */,
+				C06F3B5E299195A700F9B062 /* StatusBarView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -364,6 +376,7 @@
 			files = (
 				C0E98151298C9E4E00E77902 /* Teriyaki.xcdatamodeld in Sources */,
 				C0E8F39B29891B6100B39AD5 /* BuyBtnStyle.swift in Sources */,
+				C06F3B63299242BA00F9B062 /* BtnFavorite.swift in Sources */,
 				C00197AC298B4492004B2029 /* MotionManager.swift in Sources */,
 				C07C98B72990E8B3003A4AFF /* Tool.swift in Sources */,
 				C08782C3297F7EBC0086CDAB /* SearchBar.swift in Sources */,
@@ -378,6 +391,7 @@
 				C049DD96297E3FAB0077B87E /* ContentView.swift in Sources */,
 				C07C98B12990AD26003A4AFF /* Extensions.swift in Sources */,
 				C0B597902983B24D00655878 /* ProgressImage.swift in Sources */,
+				C06F3B5F299195A700F9B062 /* StatusBarView.swift in Sources */,
 				C088FEFE2980FD75005B18D2 /* ItemPrd.swift in Sources */,
 				C0E98156298CAC3300E77902 /* TabMenuView.swift in Sources */,
 				C0E9814E298C961F00E77902 /* CartPageView.swift in Sources */,
@@ -396,6 +410,8 @@
 				C0E98154298CABFA00E77902 /* FavoritePageView.swift in Sources */,
 				C0E9814C298BFE3C00E77902 /* BtnPay.swift in Sources */,
 				C06F3B5B2991332800F9B062 /* TabStateManager.swift in Sources */,
+				C06F3B5D299184F800F9B062 /* PrdPreviewView.swift in Sources */,
+				C06F3B6129922EF200F9B062 /* CartViewModel.swift in Sources */,
 				C02D5E7D2983D59800352C1D /* Product+CoreDataClass.swift in Sources */,
 				C088FF00298118F6005B18D2 /* ToolbarHome.swift in Sources */,
 				C0AF1DF32989690B0076D856 /* ProductsListViewModel.swift in Sources */,
