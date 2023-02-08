@@ -13,6 +13,8 @@ class CartViewModel: ObservableObject {
     @Published var totals: [CartTotal] = []
     @Published var countPrd: Int = 0
     
+    @Published var dicPrd: [String: String] = ["0": "0"]
+    
     private var isAddToCart = ""
     
     @Published var state: StatusFetch = .initional
@@ -28,6 +30,12 @@ class CartViewModel: ObservableObject {
                     self?.state = .fetched
                     if (results.products.count > 0) {
                         self?.data = results.products
+                        
+                        var newDic: [String: String] = ["0": "0"]
+                        results.products.forEach { prd in
+                            newDic[prd.productID] = prd.quantity
+                        }
+                        self?.dicPrd = newDic
                         self?.totals = results.totals
                     }
                     self?.countPrd = results.products.count
@@ -42,6 +50,11 @@ class CartViewModel: ObservableObject {
     
     
 }
+
+//                        print("results.products: \(results.products)")
+//                        [Teriyaki.CartPrd(id: "4363", productID: "123", name: "Мэун  Дезикалби Тим", model: "Горячие на 2 персоны", quantity: "1", price: "2700P", total: "2700P")]
+
+
 
 //{
 //    "products": [

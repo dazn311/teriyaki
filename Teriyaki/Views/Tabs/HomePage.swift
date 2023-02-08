@@ -6,45 +6,42 @@
 //
 
 import SwiftUI
-
-//let columns: [GridItem] = [GridItem(spacing: 4, alignment: .center),GridItem(spacing: 4, alignment: .center)]
+//import Combine
 let columnsSingel: [GridItem] = [GridItem()]
 
 struct HomePage: View {
 //    @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var prdVM : ProductsListViewModel
-//    @EnvironmentObject var tabStateManager: TabStateManager
+
     @ObservedObject var tabStateVM: TabStateManager
     
     @State var flag = false
     @State var offset: CGPoint = .zero
     
-    
-
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                //                Text("gesdf")
-                
                 if prdVM.state == .fetched {
                     if let catss = prdVM.dataArr[prdVM.parentId] {
                         VStack {
-#if os(iOS)
                             TopHorizontalView(catss: catss,tabStateVM: tabStateVM)
-#endif
                             ScrollViewReader { proxy in
                                 ScrollView(showsIndicators: false) {
                                     ForEach(catss,  id: \.id) { categ in
-                                        GridHomeView(tabStateVM: tabStateVM,categ: categ)
+                                            VStack {
+                                            GridHomeView(tabStateVM: tabStateVM,categ: categ)
+                                            }
                                             .id(categ.id)
                                     }
                                 }// end ScrollView
                                 .onChange(of: tabStateVM.currSubCategory, perform: { (value) in
-                                    withAnimation {
-                                        proxy.scrollTo(value, anchor: .top)
+//                                    print("currSubCategory: \(tabStateVM.currSubCategory)")
+                                    DispatchQueue.main.async {
+                                        withAnimation {
+                                            proxy.scrollTo(value, anchor: .top)
+                                        }
                                     }
-//                                    detectIos22()
                                 })
                             }
                         }
@@ -57,29 +54,14 @@ struct HomePage: View {
             .padding(.horizontal,4)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                
-#if os(iOS)
                 ToolbarItem(placement: .principal) {
                     ToolbarHome(withFlag: $flag, withSearchText: $prdVM.searchTerm)
                 }
-#endif
-                // add scrool bottom menu for show status;
-                //                ToolbarItem(placement: .status) {
-                //                    Text("status").padding(4)
-                //                }
             }
-            
-            
+
         }//end navigation
         .accentColor(ThemeApp.gold)
     }
-//    func detectIos22() {
-//    #if targetEnvironment(macCatalyst)
-//        print("UIKit running on macOS")
-//    #else
-//        print("Your regular code")
-//    #endif
-//    }
 }
 
 
@@ -89,6 +71,27 @@ private let itemFormatter: DateFormatter = {
     formatter.timeStyle = .short
     return formatter
 }()
+
+// add scrool bottom menu for show status;
+//                ToolbarItem(placement: .status) {
+//                    Text("status").padding(4)
+//                }
+
+
+//    @State private var cancellables: Set<AnyCancellable> = []
+
+//                                .onChange(of: tabStateVM.currSubCategory) { id in
+//                                    // When the lastMessageId changes, scroll to the bottom of the conversation
+//                                    tabStateVM.$currSubCategory.debounce(for: .seconds(0.2), scheduler: RunLoop.main)
+//                                        .sink { _ in
+//                                            withAnimation {
+//                                                proxy.scrollTo(id, anchor: .top)
+//                                            }
+//                                        }.store(in: &cancellables)
+//
+//                                }
+
+
 
 //struct HomePage_Previews: PreviewProvider {
 //    static let prdVM : ProductsListViewModel = {

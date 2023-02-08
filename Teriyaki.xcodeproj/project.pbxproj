@@ -237,7 +237,6 @@
 			isa = PBXGroup;
 			children = (
 				C088FEF62980D65D005B18D2 /* HomePage.swift */,
-				C06F3B662992B95000F9B062 /* GridHomeView.swift */,
 				C0AF1DF0298964760076D856 /* SearchPageView.swift */,
 				C0E9814D298C961F00E77902 /* CartPageView.swift */,
 				C0E98153298CABFA00E77902 /* FavoritePageView.swift */,
@@ -250,6 +249,7 @@
 		C088FEFA2980F978005B18D2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C06F3B662992B95000F9B062 /* GridHomeView.swift */,
 				C08782C2297F7EBC0086CDAB /* SearchBar.swift */,
 				C088FEFF298118F6005B18D2 /* ToolbarHome.swift */,
 				C088FEFB2980F99F005B18D2 /* MenuCuisine.swift */,

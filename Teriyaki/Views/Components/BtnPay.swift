@@ -8,6 +8,7 @@ struct BtnPay: View {
     
     var prd: ProductFromCatalog = MockeData.productFromCatalog11
     var catID: String = ""
+    
     var body: some View {
         HStack {
             Button {
@@ -25,8 +26,8 @@ struct BtnPay: View {
             }
             .cornerRadius(4)         // You also need th
             .overlay(alignment: .topTrailing) {
-                if badgeCount != "0" {
-                    Text(badgeCount)
+                if ((cartVM.dicPrd[prd.id]?.isEmpty) != nil) {
+                    Text(cartVM.dicPrd[prd.id] ?? "")
                         .fixedSize(horizontal: true, vertical: false)
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(Color.white)

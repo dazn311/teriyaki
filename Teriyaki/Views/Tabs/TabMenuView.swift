@@ -13,6 +13,7 @@ struct TabMenuView: View {
     
     @StateObject var tabStateManager: TabStateManager = TabStateManager()
     @State private var shouldShowMenu = true
+    
     init() {
         UITabBar.appearance().scrollEdgeAppearance = appearance
         UITabBar.appearance().backgroundColor = .black
@@ -51,7 +52,6 @@ struct TabMenuView: View {
                     }
                     .id(5)
             }
-//            .environmentObject(tabStateManager)
         } else {
             NavigationView {
                 List {
