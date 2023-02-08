@@ -11,6 +11,7 @@ struct HomePage: View {
 //    @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var prdVM : ProductsListViewModel
+    @EnvironmentObject var tabStateManager: TabStateManager
     
     private var columns: [GridItem] = [GridItem(spacing: 4, alignment: .center),GridItem(spacing: 4, alignment: .center)]
     private var columnsSingel: [GridItem] = [GridItem()]
@@ -21,51 +22,43 @@ struct HomePage: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-//                Text("gesdf")
-                ScrollView(showsIndicators: false) {
-                    if prdVM.state == .fetched {
-                        if let catss = prdVM.dataArr[prdVM.parentId] {
-                            LazyVStack {
-                                ForEach(catss,  id: \.id) { categ in
-                                    Section(categ.name){
-//                                    Text(categ.name)
-//                                        .foregroundColor(Color.indigo)
-
-                                    LazyVGrid(columns: columns, spacing: 0) {
-                                                ForEach(categ.products,  id: \.id) { prdObj in
-                                                    VStack(spacing: 0) {
-                                                        PrdPreviewView(product: prdObj, catID: categ.id, isShowPrice: true)
-//                                                        NavigationLink(destination: ItemPrd(product: prdObj, isShowPrice: true)) {
-//                                                            ItemPrd(product: prdObj, isShowPrice: false)
-//                                                        }
-//                                                        BtnPay(price: prdObj.price)
-//                                                        BtnPay(moc: _viewContext, prd: prdObj, price: prdObj.price)
-                                                    }
-                                                }
-                                    }//end lazyVGrid
-                                }
-                                }
+                //                Text("gesdf")
+                if prdVM.state == .fetched {
+                    if let catss = prdVM.dataArr[prdVM.parentId] {
+                        VStack {
+                            TopHorizontalView(catss: catss)
+                            ScrollViewReader { proxy in
+                                ScrollView(showsIndicators: false) {
+                                    ForEach(catss,  id: \.id) { categ in
+                                        GridHomeView(categ: categ)
+                                            .id(categ.id)
+                                    }
+                                }// end ScrollView
+                                .onChange(of: tabStateManager.currSubCategory, perform: { (value) in
+                                    withAnimation {
+                                        proxy.scrollTo(value, anchor: .top)
+                                    }
+                                })
                             }
-                            .listStyle(.plain)
                         }
-                    }else {
-                        EmptyView()
-                    }
+                    }//end ScroolReader
+                }else {
+                    EmptyView()
                 }
                 Spacer()
             }
             .padding(.horizontal,4)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                #if os(iOS)
+#if os(iOS)
                 ToolbarItem(placement: .principal) {
                     ToolbarHome(withFlag: $flag, withSearchText: $prdVM.searchTerm)
                 }
-                #endif
+#endif
                 // add scrool bottom menu for show status;
-//                ToolbarItem(placement: .status) {
-//                    Text("status").padding(4)
-//                }
+                //                ToolbarItem(placement: .status) {
+                //                    Text("status").padding(4)
+                //                }
             }
             
             
@@ -108,43 +101,6 @@ private let itemFormatter: DateFormatter = {
     
     
     
-    
-    
-    
-
-//                Button("Add prd") {
-//                    let SoGalBi = Product(context: moc)
-//                    SoGalBi.description2 = "Grilled beef ribs.500g"
-//                    SoGalBi.href = "https://teriyaki.su/index.php?route=product/product&product_id=83"
-//                    SoGalBi.jan = ""
-//                    SoGalBi.name = "So GalBi"
-//                    SoGalBi.parentID = "70"
-//                    SoGalBi.price = "2600P"
-//                    SoGalBi.minimum = "0"
-//                    SoGalBi.model = "ss"
-//                    SoGalBi.productID = "83"
-//                    SoGalBi.rating = 5
-//                    SoGalBi.special = false
-//                    SoGalBi.tax = "200"
-//                    SoGalBi.thumb = "https://teriyaki.su/image/cache/catalog/Korean/Hot/SoGalBi-200x200.jpg"
-//
-//
-//                    do {
-//                        try moc.save()
-//                    } catch {
-//                        let nsError = error as NSError
-//                        print("error2: \(nsError)")
-////                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//                    }
-//
-//                }
-//
-//                FilteredListPrd(filterKey: "parentID", filterValue: categoriesVM.parentId) { (product: Product) in
-//                    Text("\(String(describing: product.wrappedDescription)) / price: \(product.wrapPrice)")
-//                }
-//                .frame(maxHeight: 200)
-
-
 
 //private func addItem() {
 //    withAnimation {
@@ -176,160 +132,6 @@ private let itemFormatter: DateFormatter = {
 //        }
 //    }
 //}
-
-
-//                        VStack {
-//                            //sb categories;
-//                            ScrollView (.horizontal, showsIndicators: false) {
-//                                 HStack {
-//                                     ForEach(searchCatalog,  id: \.categoryID) { catObj in
-//
-//                                         Button {
-//        //                                         parentId = catObj.category_id
-//                                             print(catObj.categoryID)
-//                                         } label: {
-//                                             Text(catObj.name.split(separator: "-").last!)
-//                                                 .foregroundColor(catObj.parentID == "0" ? Color(.red): Color(.black))
-//                                                 .frame(maxWidth: .infinity, maxHeight: 30)
-//                                                 .padding(5)
-//                                                 .padding(.top, 2)
-//                                                 .padding(.bottom, 2)
-//                                                 .overlay(
-//                                                     RoundedRectangle(cornerRadius: 4)
-//                                                         .stroke(Color.white, lineWidth: 1))
-//
-//                                         }
-//                                         .background(Color.yellow) // If you have this
-//                                         .cornerRadius(4)         // You also need th
-//                                     }
-//                                 }
-//                            }
-//                            .frame(height: 30)
-//
-//                            Spacer()
-//                        }
-
-
-//toolsBar;
-//                    VStack{
-//                        HStack {
-//                            Spacer()
-//                                .frame(width: flag == false ?(UIScreen.main.bounds.size.width / 2) - 34 : 10)
-////                                                    if offset.y > 150 {
-////                                                let heightLogo = min(CGFloat(36), 10 + max(2, offset.y))
-//                                let heightLogo = CGFloat(36)
-//                                withAnimation(.spring()) {
-//                                    Image("logo22")
-//                                        .resizable()
-//                                        .aspectRatio(contentMode: .fill)
-//                                        .frame(width: heightLogo, height: heightLogo)
-//                                        .clipShape(Circle())
-//                                }
-//
-////                                                    }
-//
-//                              if flag {
-//                                SearchBar(searchText: $searchText, flag: $flag)
-//                                  .frame(maxWidth: .infinity, maxHeight: .infinity)
-//
-//
-//                              } else {
-//                                  Spacer()
-//                                      .frame(minWidth: 10)
-//
-//                                Button {
-//                                    withAnimation(.spring()) { flag = true }
-//                                } label: {
-//                                  Image(systemName: "text.magnifyingglass")
-//                                        .foregroundColor(Color.gray)
-//                                }
-//
-//                                Button {
-//                                } label: {
-//                                  Image(systemName: "phone.connection")
-//                                        .foregroundColor(Color.gray)
-//                                }
-//
-//                              }
-//                            }
-//
-//                    }
-
-    
- 
- 
-//                            if categoriesVM.statusFetchPrd == .fetched {
-//                                //sub categories;
-//                                ScrollView(showsIndicators: false) {
-//                                    ForEach(curCatalog,  id: \.categoryID) { catObj in
-//                                        let curProducts = categoriesVM.dataProducts.filter({ prd in
-//                                            prd.parentID == catObj.categoryID
-//                                        })
-//
-//                                        let searchProducts = searchText != "" ? curProducts.filter({ prd in
-//                                            prd.name.localizedLowercase.contains(searchText.localizedLowercase) ||
-//                                            prd.description.localizedLowercase.contains(searchText.localizedLowercase) ||
-//                                            prd.model.localizedLowercase.contains(searchText.localizedLowercase)
-//                                        }) : curProducts
-//
-//                                        LazyVStack {
-//                                                Text(catObj.name.split(separator: "-").last!)
-//                                                .foregroundColor(colorScheme == .dark ? Color(.white): Color(.black))
-//                                                    .frame(maxWidth: .infinity)
-//
-//                                            Rectangle()
-//                                                .fill(Color.gray.opacity(0.6))
-//                                                .frame(height: 0.5)
-//
-//                                            //products list;
-//                                            let col = searchProducts.count > 1 ? columns : columnsSingel
-//
-//                                            LazyVGrid(columns: col, spacing: 0) {
-//
-//                                                        ForEach(searchProducts,  id: \.productID) { prdObj in
-//                                                            ItemPrd(name: prdObj.name, pic: prdObj.thumb, describe: prdObj.description, price: prdObj.price)
-//
-//                                                        }
-//
-//                                            }//end lazyVGrid
-//    //                                        .overlay (
-//    //                                            GeometryReader{proxy -> Color  in
-//    //                                               let rect = proxy.frame(in: .global)
-//    //                                                if startOffset == .zero {
-//    //                                                    DispatchQueue.main.async {
-//    //                                                        startOffset = CGPoint(x: rect.minX, y: rect.minY + 20)
-//    //                                                    }
-//    //                                                }
-//    //
-//    //                                               DispatchQueue.main.async {
-//    //                                                   offset = CGPoint(x: startOffset.x - rect.minX, y: startOffset.y - rect.minY)
-//    //            //                                       print(offset)
-//    //                                               }
-//    //
-//    //                                               return Color.clear
-//    //                                            }
-//    //                                            .frame(width: 0, height: 0)
-//    //                                            , alignment: .top
-//    //
-//    //                                        ) //end overlay for sub categories;
-//
-//                                        }// end LazyVStack
-//    //                                    .id(catObj.name)
-//                                        .frame(maxWidth: .infinity, maxHeight: searchProducts.count > 0 ? .infinity : 0)
-//    //                                    .background(Color.green)
-//
-//                                    }//end forEach
-//                                }
-//
-////                            }// end if dataPrd
-//                            } else {
-//                                Text("Loading Products...")
-//                            }
-//
-//                            if categoriesVM.dataProducts.count == 0 {
-//                                Text("not products")
-//                            }
- 
 
 
 //                }

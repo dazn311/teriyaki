@@ -7,7 +7,7 @@ struct CartPageView: View {
         VStack {
             Text("Корзина")
             List(cartVM.data, id: \.id) { cart in
-                Text("\(cart.name)")
+                Text("\(cart.name) | \(cart.quantity) шт.")
             }
             if cartVM.totals.count > 0 {
                 Text("\(cartVM.data.count) товаров на сумму: \(cartVM.totals[0].text)")

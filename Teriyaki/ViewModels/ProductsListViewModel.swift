@@ -30,16 +30,6 @@ class ProductsListViewModel: ObservableObject {
                   self?.fetchPrds(for: parId)
                 }
         }.store(in: &subscriptions)
-        
-//        let context = PersistenceController.shared.container.viewContext
-//        let request = Product.fetchRequest()
-        
-//        do {
-//            dataCoreArr = try context.fetch(request)
-//            print("error, need implimation resArr: \(dataCoreArr)")
-//        }catch {
-//            print("[40] error: \(error)")
-//        }
     }
     
     func fetchPrds(for searchTerm: String) {

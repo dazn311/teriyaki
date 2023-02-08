@@ -19,8 +19,6 @@ struct BtnPay: View {
                     .frame(maxHeight: 30)
                     .padding(.horizontal,16)
                     .padding(.vertical, 2)
-                //                    .background(Capsule(style: .circular).stroke(Color.gray, lineWidth: 1.0))
-                //                    .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1.0))
                     .clipped()
                 
                     .overlay(RoundedRectangle(cornerRadius: 4).stroke(ThemeApp.gold, lineWidth: 1))

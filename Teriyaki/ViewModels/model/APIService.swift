@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-
-
 class APIService {
     
     func fetchCatalogTop(searchTerm: String, completion: @escaping(Result<CategoriesFetch,ApiError>) -> Void) {
@@ -21,7 +18,6 @@ class APIService {
         let url = createURL(for: searchTerm, type: "prd")
         fetch(type: PrdAndCatFetch.self, url: url, completion: completion)
     }
-    
     
     func fetchCartData(completion: @escaping(Result<CartFetch,ApiError>) -> Void) {
         let url = createURL(for: "", type: "cartPrd")
@@ -68,9 +64,7 @@ class APIService {
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-
             if let error = error as? URLError {
-                
                 completion(Result.failure(ApiError.urlSession(error)))
             } else if let response = response as? HTTPURLResponse, !(200...299).contains(response.statusCode) {
                 completion(Result.failure(ApiError.badResponse(response.statusCode)))
@@ -96,7 +90,7 @@ class APIService {
         var queryItems = [] as [URLQueryItem]
         
         if (type == "cat") {
-//            queryItems.append(URLQueryItem(name: "path", value: String(type)))
+            //            queryItems.append(URLQueryItem(name: "path", value: String(type)))
             queryItems = [URLQueryItem(name: "route", value: "api/zstore3\(searchTerm)")]
         }
         if (type == "prd") {

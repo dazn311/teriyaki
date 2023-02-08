@@ -22,26 +22,25 @@ struct PrdPreviewView: View {
                         VStack {
                             CacheAsyncImage(id: prd.id, url: URL(string: prd.thumb)!) { AsyncImagePhase in
                                 switch AsyncImagePhase {
-                                        case .success(let image):
-                                            image
-                                            .resizable()
-                                            .scaledToFit()
-                                        case .empty:
-                                            Image("\(prd.id)")
-                                            .resizable()
-                                            .clipped()
-                                        case .failure(_):
-                                            Image("\(prd.id)")
-                                            .resizable()
-                                            .clipped()
-                                        @unknown default:
-                                            Image("\(prd.id)")
-                                            .resizable()
-                                            .clipped()
-                                        }
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                case .empty:
+                                    Image("\(prd.id)")
+                                        .resizable()
+                                        .clipped()
+                                case .failure(_):
+                                    Image("\(prd.id)")
+                                        .resizable()
+                                        .clipped()
+                                @unknown default:
+                                    Image("\(prd.id)")
+                                        .resizable()
+                                        .clipped()
+                                }
                                 
                             }//MARK: end VStack
-                            
                             
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("\(prd.name)")
@@ -55,12 +54,8 @@ struct PrdPreviewView: View {
                             Spacer()
                         }//MARK: end VStack
                     }//MARK: end Nav
-
-    //                    BtnPay(price: price)
                     BtnPay(prd: prd, catID: catID)
                         .environment(\.managedObjectContext, viewContext)
-
-
                 }
                 Spacer()
             }//MARK: end ScrollView

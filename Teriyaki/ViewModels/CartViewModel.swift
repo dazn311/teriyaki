@@ -7,26 +7,18 @@
 
 import Foundation
 
-
 class CartViewModel: ObservableObject {
     private let service = APIService()
     @Published var data: [CartPrd] = []
     @Published var totals: [CartTotal] = []
+    @Published var countPrd: Int = 0
     
     private var isAddToCart = ""
     
     @Published var state: StatusFetch = .initional
     @Published var stateMessage: String = "initional"
     
-//    init() {
-//        self.fetchCart()
-//    }
-    
     func fetchCart() {
-//        guard data.count == 0 else {
-//            return
-//        }
-        
         state = .fetching
         
         service.fetchCartData() { [weak self]  result in
@@ -38,7 +30,8 @@ class CartViewModel: ObservableObject {
                         self?.data = results.products
                         self?.totals = results.totals
                     }
-//                    print("results: \(results)")
+                    self?.countPrd = results.products.count
+                    //                    print("results: \(results)")
                 case .failure(let error):
                     print("58-error loading catalog: \(error)")
                     self?.state = .error(error.localizedDescription)

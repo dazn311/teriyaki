@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabMenuView: View {
     let appearance: UITabBarAppearance = UITabBarAppearance()
+    @EnvironmentObject var cartVM : CartViewModel
     
     @StateObject var tabStateManager: TabStateManager = TabStateManager()
     @State private var shouldShowMenu = true
@@ -25,7 +26,7 @@ struct TabMenuView: View {
                         Label("Меню", systemImage: "menucard")
                     }
                     .id(1)
-    //                .badge(2)
+                    .badge(0)
 
                 SearchPageView()
                     .tabItem {
@@ -37,17 +38,20 @@ struct TabMenuView: View {
                         Label("Корзина", systemImage: "bag")
                     }
                     .id(3)
+                    .badge(cartVM.countPrd)
                 FavoritePageView(filter: "parentID")
                     .tabItem {
                         Label("Избранные", systemImage: "heart.circle")
                     }
                     .id(4)
+                    .badge(2)
                 SettingPageView()
                     .tabItem {
                         Label("Настройки", systemImage: "digitalcrown.arrow.clockwise")
                     }
                     .id(5)
             }
+            .environmentObject(tabStateManager)
         } else {
             NavigationView {
                 List {
