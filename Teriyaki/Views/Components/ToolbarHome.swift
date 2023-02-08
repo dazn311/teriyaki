@@ -13,7 +13,7 @@ struct ToolbarHome: View {
     
     @EnvironmentObject var prdVM : ProductsListViewModel
     @EnvironmentObject var catsVM : CategoriesListViewModel
-    
+    @State var isIOSDev: Bool = true
     
     @Binding var flag: Bool
     @Binding var searchText: String
@@ -21,6 +21,7 @@ struct ToolbarHome: View {
     init(withFlag: Binding<Bool>, withSearchText: Binding<String>) {
         self._flag = withFlag
         self._searchText = withSearchText
+//        detectIos22()
     }
 
     var body: some View {
@@ -45,42 +46,51 @@ struct ToolbarHome: View {
                 }
                 .frame(minWidth: 100, idealWidth: 100, maxWidth: 100, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .center)
                 
-                Spacer()
-                    .frame(width: flag == false ?(UIScreen.main.bounds.size.width / 2) - 140 : 2)
-
-                
-
-                  if flag {
-                      SearchBar(searchText: $searchText, flag: $flag)
-                      .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                  } else {
+                if isIOSDev {
                     Spacer()
-                      .frame(minWidth: 10)
+                        .frame(width: flag == false ?(UIScreen.main.bounds.size.width / 2) - 140 : 2)
 
-                    Button {
-                        withAnimation(.spring()) {
-                            flag = true }
-                    } label: {
-                      Image(systemName: "text.magnifyingglass")
-                            .foregroundColor(Color.gray)
-                    }
+                      if flag {
+                          SearchBar(searchText: $searchText, flag: $flag)
+                          .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                    Button {
-                        callNumber(phoneNumber: "+74950980409")
-                    } label: {
-                      Image(systemName: "phone.connection")
-                            .foregroundColor(Color.gray)
-                    }
+                      } else {
+                        Spacer()
+                          .frame(minWidth: 10)
 
-                  }
-            
-            }
+                        Button {
+                            withAnimation(.spring()) {
+                                flag = true }
+                        } label: {
+                          Image(systemName: "text.magnifyingglass")
+                                .foregroundColor(Color.gray)
+                        }
+
+                        Button {
+                            callNumber(phoneNumber: "+74950980409")
+                        } label: {
+                          Image(systemName: "phone.connection")
+                                .foregroundColor(Color.gray)
+                        }
+
+                      }
+                
+                }
+                
+                    
+                }
             Logo(flag: $flag)
         }
     }//end body
     
-    
+    func detectIos22() {
+    #if targetEnvironment(macCatalyst)
+        print("UIKit running on macOS")
+        isIOSDev = false
+    #else
+        print("Your regular code")
+    #endif
+    }
     
     private func callNumber(phoneNumber: String) {
         guard let url = URL(string: "telprompt://\(phoneNumber)"),

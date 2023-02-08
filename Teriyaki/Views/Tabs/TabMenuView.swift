@@ -21,7 +21,7 @@ struct TabMenuView: View {
         
         if UIDevice.current.userInterfaceIdiom == .phone {
             TabView {
-                HomePage()
+                HomePage(tabStateVM: tabStateManager)
                     .tabItem {
                         Label("Меню", systemImage: "menucard")
                     }
@@ -51,11 +51,11 @@ struct TabMenuView: View {
                     }
                     .id(5)
             }
-            .environmentObject(tabStateManager)
+//            .environmentObject(tabStateManager)
         } else {
             NavigationView {
                 List {
-                    NavigationLink("Меню", destination: HomePage(), isActive: $shouldShowMenu)
+                    NavigationLink("Меню", destination: HomePage(tabStateVM: tabStateManager), isActive: $shouldShowMenu)
                     NavigationLink("Поиск", destination: SearchPageView())
                     NavigationLink("Корзина", destination: CartPageView())
                     NavigationLink("Избранные", destination: FavoritePageView(filter: "parentID"))

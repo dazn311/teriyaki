@@ -9,8 +9,8 @@ import SwiftUI
 
 struct TopHorizontalView: View {
     var catss: [CatAndPrd]
-    @EnvironmentObject var tabStateManager: TabStateManager
-    
+//    @EnvironmentObject var tabStateManager: TabStateManager
+    @ObservedObject var tabStateVM: TabStateManager
     var body: some View {
         HStack {
             ScrollViewReader { proxy in
@@ -18,7 +18,7 @@ struct TopHorizontalView: View {
                     HStack {
                         ForEach(catss,  id: \.name) { categ in
                             Button {
-                                tabStateManager.currSubCategory = categ.id
+                                tabStateVM.currSubCategory = categ.id
                             } label: {
                                 HStack (spacing: 1) {
                                     Text("\(categ.name)")
@@ -37,11 +37,13 @@ struct TopHorizontalView: View {
                         
                     }
                 }
-                .onChange(of: tabStateManager.currSubCategoryTop, perform: { (value) in
+#if os(iOS)
+                .onChange(of: tabStateVM.currSubCategoryTop, perform: { (value) in
                     withAnimation {
                         proxy.scrollTo(value, anchor: .center)
                     }
                 })
+#endif
             }
         }
     }

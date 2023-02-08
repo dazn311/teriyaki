@@ -7,37 +7,44 @@
 
 import SwiftUI
 
+//let columns: [GridItem] = [GridItem(spacing: 4, alignment: .center),GridItem(spacing: 4, alignment: .center)]
+let columnsSingel: [GridItem] = [GridItem()]
+
 struct HomePage: View {
 //    @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var prdVM : ProductsListViewModel
-    @EnvironmentObject var tabStateManager: TabStateManager
-    
-    private var columns: [GridItem] = [GridItem(spacing: 4, alignment: .center),GridItem(spacing: 4, alignment: .center)]
-    private var columnsSingel: [GridItem] = [GridItem()]
+//    @EnvironmentObject var tabStateManager: TabStateManager
+    @ObservedObject var tabStateVM: TabStateManager
     
     @State var flag = false
     @State var offset: CGPoint = .zero
+    
+    
 
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 //                Text("gesdf")
+                
                 if prdVM.state == .fetched {
                     if let catss = prdVM.dataArr[prdVM.parentId] {
                         VStack {
-                            TopHorizontalView(catss: catss)
+#if os(iOS)
+                            TopHorizontalView(catss: catss,tabStateVM: tabStateVM)
+#endif
                             ScrollViewReader { proxy in
                                 ScrollView(showsIndicators: false) {
                                     ForEach(catss,  id: \.id) { categ in
-                                        GridHomeView(categ: categ)
+                                        GridHomeView(tabStateVM: tabStateVM,categ: categ)
                                             .id(categ.id)
                                     }
                                 }// end ScrollView
-                                .onChange(of: tabStateManager.currSubCategory, perform: { (value) in
+                                .onChange(of: tabStateVM.currSubCategory, perform: { (value) in
                                     withAnimation {
                                         proxy.scrollTo(value, anchor: .top)
                                     }
+//                                    detectIos22()
                                 })
                             }
                         }
@@ -50,6 +57,7 @@ struct HomePage: View {
             .padding(.horizontal,4)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                
 #if os(iOS)
                 ToolbarItem(placement: .principal) {
                     ToolbarHome(withFlag: $flag, withSearchText: $prdVM.searchTerm)
@@ -65,7 +73,15 @@ struct HomePage: View {
         }//end navigation
         .accentColor(ThemeApp.gold)
     }
+//    func detectIos22() {
+//    #if targetEnvironment(macCatalyst)
+//        print("UIKit running on macOS")
+//    #else
+//        print("Your regular code")
+//    #endif
+//    }
 }
+
 
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
