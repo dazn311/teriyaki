@@ -27,7 +27,7 @@ struct SearchPageView: View {
                                                 .foregroundColor(Color.indigo)
                                             
                                             ForEach(categ.products,  id: \.id) { prd in
-                                                NavigationLink(destination: ItemPrd(product: prd, catID: categ.id, isShowPrice: true)
+                                                NavigationLink(destination: ItemPrd(product: prd, catID: categ.id)
                                                     .environment(\.managedObjectContext, viewContext)
                                                 )
                                                 {

@@ -36,7 +36,6 @@ struct HomePage: View {
                                     }
                                 }// end ScrollView
                                 .onChange(of: tabStateVM.currSubCategory, perform: { (value) in
-//                                    print("currSubCategory: \(tabStateVM.currSubCategory)")
                                     DispatchQueue.main.async {
                                         withAnimation {
                                             proxy.scrollTo(value, anchor: .top)

@@ -16,9 +16,9 @@ struct PrdPreviewView: View {
     var body: some View {
         if let prd = product {
             
-            ScrollView(showsIndicators: false) {
+//            ScrollView(showsIndicators: false) {
                 VStack(spacing: 1) {
-                    NavigationLink(destination: ItemPrd(product: prd, isShowPrice: true)) {
+                    NavigationLink(destination: ItemPrd(product: prd)) {
                         VStack {
                             CacheAsyncImage(id: prd.id, url: URL(string: prd.thumb)!) { AsyncImagePhase in
                                 switch AsyncImagePhase {
@@ -58,25 +58,25 @@ struct PrdPreviewView: View {
                         .environment(\.managedObjectContext, viewContext)
                 }
                 Spacer()
-            }//MARK: end ScrollView
+//            }//MARK: end ScrollView
         }
     }
 }
 
-struct PrdPreviewView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            VStack {
-            PrdPreviewView(product: prd11, isShowPrice: true)
-                .preferredColorScheme(.dark)
-                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            }
-            .frame(width: 300, height: 400)
-            
-            PrdPreviewView(product: prd11, isShowPrice: true)
-                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-        }
-    }
-}
+//struct PrdPreviewView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            VStack {
+//                PrdPreviewView(tabStateVM: tabStateVM, product: prd11, isShowPrice: true)
+//                .preferredColorScheme(.dark)
+//                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//            }
+//            .frame(width: 300, height: 400)
+//            
+//            PrdPreviewView(product: prd11, isShowPrice: true)
+//                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//        }
+//    }
+//}
 
 let prd11 = ProductFromCatalog(id: "1", thumb: "https://teriyaki.su/image/cache/catalog/China/Donpauk-300x200.jpg", name: "Донпаюк", description: "Грудинка свиная, микс салат, специальный соус450г", price: "2 500р", jan: "", sortOrder: "1", viewed: "564", categoryID: "78", rating: 2, href: "http://teriyaki.su//kitaiskaya-kuhnya/goryachie_blyuda_kitaiskaya?product_id=100")
