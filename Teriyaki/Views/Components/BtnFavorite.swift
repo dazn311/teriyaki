@@ -10,15 +10,28 @@ import SwiftUI
 
 struct BtnFavorite: View {
     @Environment(\.managedObjectContext) var moc
+    @State var isFav: Bool
     var prd: ProductFromCatalog = MockeData.productFromCatalog11
     var catID: String = ""
     var body: some View {
         Button {
             addToFavPrd(prd: prd)
         } label: {
-            Image(systemName: "heart.circle")
-                .foregroundColor(.red).padding(4)
+//            if fetchRequestPrd.filter({ $0.productID == prd.id}).count > 0 {
+            if (isExist(productID: prd.id)) {
+                Image(systemName: "heart.circle")
+                    .foregroundColor(.red).padding(4)
+            }else {
+                Image(systemName: "heart.circle")
+                    .foregroundColor(.gray).padding(4)
+            }
         }
+    }
+    
+    init(prd: ProductFromCatalog, catID: String) {
+        self.prd = prd
+        self.catID = catID
+        self.isFav = false
     }
     
     private func addToFavPrd(prd: ProductFromCatalog ) {
@@ -39,7 +52,7 @@ struct BtnFavorite: View {
             SoGalBi.special = false
             SoGalBi.tax = "0"
             SoGalBi.thumb = prd.thumb
-            
+            self.isFav = true
             PersistenceController.shared.save()
         }
         

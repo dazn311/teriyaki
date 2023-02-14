@@ -47,9 +47,11 @@ struct ItemPrd: View {
             }
             .onAppear {
                     Tool.hideTabBar()
+//                UITabBar.appearance().isHidden = true
             }
             .onDisappear {
                 withAnimation {
+//                    UITabBar.appearance().isHidden = false
                         Tool.showTabBar()
                 }
                 
@@ -73,7 +75,7 @@ struct ItemPrd: View {
             }
             
         }
-        .padding(.horizontal)
+        .padding(.horizontal,0)
         .frame(minHeight: 128, maxHeight: 128, alignment: .leading)
     }
 }

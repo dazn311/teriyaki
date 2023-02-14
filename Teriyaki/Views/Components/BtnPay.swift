@@ -2,9 +2,10 @@ import SwiftUI
 import CoreData
 
 struct BtnPay: View {
-    @Environment(\.managedObjectContext) var moc
+//    @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var cartVM : CartViewModel
     @State var badgeCount: String = "0"
+    @State var fetching: Bool = false
     
     var prd: ProductFromCatalog = MockeData.productFromCatalog11
     var catID: String = ""
@@ -12,17 +13,30 @@ struct BtnPay: View {
     var body: some View {
         HStack {
             Button {
-                addPrd(prd: prd)
+                if !fetching {
+                    addPrd(prd: prd)
+                }
             } label: {
-                Text("\(prd.price)")
-                    .badge(3)
-                    .foregroundColor(ThemeApp.gold) // If you have this
-                    .frame(maxHeight: 30)
-                    .padding(.horizontal,16)
-                    .padding(.vertical, 2)
-                    .clipped()
+                if fetching {
+                    ProgressView()
+//                    Text("loading")
+                        .foregroundColor(ThemeApp.gold) // If you have this
+                        .frame(maxHeight: 30)
+                        .padding(.horizontal,34)
+                        .padding(.vertical, 2)
+                        .clipped()
+                        .overlay(RoundedRectangle(cornerRadius: 4).stroke(ThemeApp.gold, lineWidth: 1))
+                } else {
+                    Text("\(prd.price)")
+//                        .badge(3)
+                        .foregroundColor(ThemeApp.gold) // If you have this
+                        .frame(maxHeight: 30)
+                        .padding(.horizontal,16)
+                        .padding(.vertical, 2)
+                        .clipped()
+                        .overlay(RoundedRectangle(cornerRadius: 4).stroke(ThemeApp.gold, lineWidth: 1))
+                }
                 
-                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(ThemeApp.gold, lineWidth: 1))
             }
             .cornerRadius(4)         // You also need th
             .overlay(alignment: .topTrailing) {
@@ -44,18 +58,21 @@ struct BtnPay: View {
             
             Spacer()
         }
-        .frame(minHeight: 50, maxHeight: 50, alignment: .leading)
-        .padding(.horizontal,10)
-        .padding(.bottom,4)
+//        .background(Color.red)
+//        .frame(minHeight: 50, maxHeight: 50, alignment: .leading)
+//        .padding(.horizontal,4)
+//        .padding(.bottom,4)
     }
     
     func addPrd(prd: ProductFromCatalog ) {
 //        print("add: \(prd)")
         let service = APIService()
         let data = [PrdFetchQuery(keyQuery: "product_id", valQuery: prd.id),PrdFetchQuery(keyQuery: "quantity", valQuery: "1")]
-        
+        self.fetching = true
         service.addToCart(data: data) { result in
             DispatchQueue.main.async {
+                self.fetching = false
+                
                 switch result {
                 case .success(let results):
                     if results.res == "ok" {
@@ -76,13 +93,14 @@ struct BtnPay: View {
 //type fetch: AddToCartRequest
 //The data couldn’t be read because it isn’t in the correct format.
 
-struct BtnPay_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            BtnPay()
-            BtnPay()
-                .preferredColorScheme(.dark)
-        }
-    }
-}
+//struct BtnPay_Previews: PreviewProvider {
+//    static var cartVM : CartViewModel = CartViewModel()
+//    static var previews: some View {
+//        Group {
+//            BtnPay(cartVM: cartVM, badgeCount: "3", prd: ProductFromCatalog(id: "2", thumb: "", name: "df", description: "df", price: "222", jan: "", sortOrder: "3", viewed: "3", categoryID: "3", rating: 3, href: ""), catID: "33")
+////            BtnPay()
+//                .preferredColorScheme(.dark)
+//        }
+//    }
+//}
 

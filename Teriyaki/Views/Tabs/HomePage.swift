@@ -17,21 +17,25 @@ struct HomePage: View {
     @ObservedObject var tabStateVM: TabStateManager
     
     @State var flag = false
-    @State var offset: CGPoint = .zero
+//    @State var offset: CGPoint = .zero
+//    @State var startOffset: CGPoint = .zero
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
+            VStack (alignment: .trailing) {
                 if prdVM.state == .fetched {
                     if let catss = prdVM.dataArr[prdVM.parentId] {
                         VStack {
                             TopHorizontalView(catss: catss,tabStateVM: tabStateVM)
+                                .overlay(
+                                 Divider()
+                                    .padding(.horizontal, -16)
+                                 , alignment: .bottom
+                                )
                             ScrollViewReader { proxy in
                                 ScrollView(showsIndicators: false) {
                                     ForEach(catss,  id: \.id) { categ in
-                                            VStack {
-                                            GridHomeView(tabStateVM: tabStateVM,categ: categ)
-                                            }
+                                        GridHomeView(tabStateVM: tabStateVM,categ: categ)
                                             .id(categ.id)
                                     }
                                 }// end ScrollView
@@ -42,8 +46,10 @@ struct HomePage: View {
                                         }
                                     }
                                 })
+//                                .coordinateSpace(name: "scroll")
                             }
                         }
+                        .frame(maxWidth: .infinity)
                     }//end ScroolReader
                 }else {
                     EmptyView()
@@ -70,6 +76,26 @@ private let itemFormatter: DateFormatter = {
     formatter.timeStyle = .short
     return formatter
 }()
+
+//    .overlay(
+//        GeometryReader { proxy -> Color in
+//            let rect = proxy.frame(in: .global)
+//
+//            if startOffset == .zero {
+//                DispatchQueue.main.async {
+//                    startOffset = CGPoint(x: rect.midX, y: rect.midY)
+//                }
+//            }
+//            DispatchQueue.main.async {
+//                let currOFfset = CGPoint(x: startOffset.x - rect.midX, y: startOffset.y - rect.midX)
+//                print(" - rect: \(String(format: "%.1f",currOFfset.y))")
+//            }
+//            return Color.clear
+//        }
+//            .frame(width: UIScreen.main.bounds.width, height: 0)
+//
+//        ,alignment: .top
+//    )
 
 // add scrool bottom menu for show status;
 //                ToolbarItem(placement: .status) {

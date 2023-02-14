@@ -51,6 +51,8 @@
 		C0B597902983B24D00655878 /* ProgressImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B5978F2983B24D00655878 /* ProgressImage.swift */; };
 		C0B597922983C57A00655878 /* SetupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B597912983C57A00655878 /* SetupApp.swift */; };
 		C0C1B0532993ED70001FEAE5 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1B0522993ED70001FEAE5 /* CheckoutView.swift */; };
+		C0C1B05529953CFA001FEAE5 /* OffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1B05429953CFA001FEAE5 /* OffsetKey.swift */; };
+		C0C1B05729953EE4001FEAE5 /* OffsetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1B05629953EE4001FEAE5 /* OffsetModifier.swift */; };
 		C0DFD0DE298D25880000B08C /* VersionDataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFD0DC298D25880000B08C /* VersionDataEntity+CoreDataClass.swift */; };
 		C0DFD0DF298D25880000B08C /* VersionDataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFD0DD298D25880000B08C /* VersionDataEntity+CoreDataProperties.swift */; };
 		C0DFD0E1298D3E9E0000B08C /* SettingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFD0E0298D3E9E0000B08C /* SettingPageView.swift */; };
@@ -110,6 +112,8 @@
 		C0B5978F2983B24D00655878 /* ProgressImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressImage.swift; sourceTree = "<group>"; };
 		C0B597912983C57A00655878 /* SetupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupApp.swift; sourceTree = "<group>"; };
 		C0C1B0522993ED70001FEAE5 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
+		C0C1B05429953CFA001FEAE5 /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
+		C0C1B05629953EE4001FEAE5 /* OffsetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetModifier.swift; sourceTree = "<group>"; };
 		C0DFD0DC298D25880000B08C /* VersionDataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VersionDataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C0DFD0DD298D25880000B08C /* VersionDataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VersionDataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C0DFD0E0298D3E9E0000B08C /* SettingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPageView.swift; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 				C0AF1DF22989690B0076D856 /* ProductsListViewModel.swift */,
 				C06F3B5A2991332800F9B062 /* TabStateManager.swift */,
 				C06F3B6029922EF200F9B062 /* CartViewModel.swift */,
+				C0C1B05629953EE4001FEAE5 /* OffsetModifier.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				C0AF1DEC298946610076D856 /* CategoriesFetch.swift */,
 				C0AF1DEE29894C0A0076D856 /* StatusFetch.swift */,
 				C00197AB298B4492004B2029 /* MotionManager.swift */,
+				C0C1B05429953CFA001FEAE5 /* OffsetKey.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -386,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0E98151298C9E4E00E77902 /* Teriyaki.xcdatamodeld in Sources */,
+				C0C1B05529953CFA001FEAE5 /* OffsetKey.swift in Sources */,
 				C0E8F39B29891B6100B39AD5 /* BuyBtnStyle.swift in Sources */,
 				C06F3B63299242BA00F9B062 /* BtnFavorite.swift in Sources */,
 				C00197AC298B4492004B2029 /* MotionManager.swift in Sources */,
@@ -407,6 +414,7 @@
 				C06F3B5F299195A700F9B062 /* StatusBarView.swift in Sources */,
 				C088FEFE2980FD75005B18D2 /* ItemPrd.swift in Sources */,
 				C0E98156298CAC3300E77902 /* TabMenuView.swift in Sources */,
+				C0C1B05729953EE4001FEAE5 /* OffsetModifier.swift in Sources */,
 				C0E9814E298C961F00E77902 /* CartPageView.swift in Sources */,
 				C0B5978E2983A11500655878 /* prettyJSONString.swift in Sources */,
 				C02D5E7E2983D59800352C1D /* Product+CoreDataProperties.swift in Sources */,

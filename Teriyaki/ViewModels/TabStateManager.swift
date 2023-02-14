@@ -12,7 +12,7 @@ class TabStateManager: ObservableObject {
     @Published var selection: Int = 1
     @Published var mayChange: Bool = true
     
-    @Published var currSubCategoryTop: String = "0" {
+    @Published var currSubCategoryTop: String = "76" {
         didSet {
 //            print("state currSubCategoryTop change to: \(currSubCategoryTop)")
 //            if self.mayChange {

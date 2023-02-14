@@ -25,19 +25,23 @@ struct PrdPreviewView: View {
                                 case .success(let image):
                                     image
                                         .resizable()
-                                        .scaledToFit()
+                                        .scaledToFill()
+//                                        .scaledToFit()
                                 case .empty:
                                     Image("\(prd.id)")
                                         .resizable()
-                                        .clipped()
+                                        .scaledToFill()
+//                                        .clipped()
                                 case .failure(_):
                                     Image("\(prd.id)")
                                         .resizable()
-                                        .clipped()
+                                        .scaledToFill()
+//                                        .clipped()
                                 @unknown default:
                                     Image("\(prd.id)")
                                         .resizable()
-                                        .clipped()
+                                        .scaledToFill()
+//                                        .clipped()
                                 }
                                 
                             }//MARK: end VStack
@@ -45,19 +49,29 @@ struct PrdPreviewView: View {
                             VStack(alignment: .leading, spacing: 0) {
                                 Text("\(prd.name)")
                                     .foregroundColor(Color(red: 205 / 255, green: 91 / 255, blue: 15 / 255)) // If you have this
-                                    .frame(maxWidth: .infinity, minHeight: 42, alignment: .topLeading)
+                                    .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .topLeading)
                                     .padding(.horizontal, 0)
                                 Spacer()
                             }//MARK: end VStack
                             .padding(.vertical, 0)
-                            .frame(minHeight: 42, maxHeight: 42, alignment: .leading)
-                            Spacer()
+                            .padding(.horizontal, 4)
+                            .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .leading)
+//                            Spacer()
+//                                .onAppear {
+//                                    print("prd-\(prd.id)-\(prd.name) (\(catID))")
+//                                }
                         }//MARK: end VStack
+                        .padding(.horizontal,0)
                     }//MARK: end Nav
+//                    .background(Color.green)
                     BtnPay(prd: prd, catID: catID)
+                        .padding(.horizontal, 4)
+                        .padding(.bottom, 16)
                         .environment(\.managedObjectContext, viewContext)
                 }
-                Spacer()
+                .background(Color.gray.opacity(0.1))
+                .frame(maxWidth: .infinity)
+//                Spacer()
 //            }//MARK: end ScrollView
         }
     }
