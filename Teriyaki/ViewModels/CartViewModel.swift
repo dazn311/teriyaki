@@ -48,7 +48,9 @@ class CartViewModel: ObservableObject {
         }
     }
     
-    
+    static let dataSample: [CartPrd] = [CartPrd(id: "4302", productID: "57", name: "Роллы классика лосось спайси", model: "Роллы", quantity: "2", price: "360P", total: "720P")]
+    static let totalsSample: [CartTotal] = [CartTotal(title: "Сумма", text: "720P"),CartTotal(title: "Итого", text: "720P")]
+
 }
 
 //                        print("results.products: \(results.products)")

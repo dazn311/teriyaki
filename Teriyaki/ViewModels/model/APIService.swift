@@ -116,7 +116,15 @@ class APIService {
         }
         
         let request = NSMutableURLRequest(url: URL(string: baseURL)!)
+//        var request = URLRequest(url: URL(string: baseURL)!)
         request.httpMethod = "POST"
+        
+//        do {
+//            request.httpBody = try JSONSerialization.data(withJSONObject: [PrdFetchQuery].self, options: .prettyPrinted)
+//            print("[124] \(request.httpBody)")
+//        }catch {
+//            print("[125] \(error)")
+//        }
         
         var postString = "" //"param_name_one=\( value_1 )&param_name_two=\(value_2)&........."
         data.forEach { query1 in

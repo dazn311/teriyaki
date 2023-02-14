@@ -40,8 +40,6 @@ struct FavoritePageView: View {
     
     init(filter: String) {
         _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [SortDescriptor(\.price)], predicate: nil)
-//        _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [], predicate: nil)
-//        _fetchRequestPrd = FetchRequest<Product>(sortDescriptors: [], predicate: NSPredicate(format: "parentID BEGINSWITH %@", filter))
     }
     
     func deleteTodo(prds: [Product], offesets: IndexSet){
