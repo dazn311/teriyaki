@@ -37,6 +37,7 @@ struct CartPageView: View {
                     .padding(.trailing, 4)
                 }
                 .listRowInsets(EdgeInsets())
+                .padding(4)
 //                .padding(.horizontal, 0)
             }
 //            .padding(.horizontal, 0)

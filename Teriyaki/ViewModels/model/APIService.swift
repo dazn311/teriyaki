@@ -118,6 +118,8 @@ class APIService {
         let request = NSMutableURLRequest(url: URL(string: baseURL)!)
 //        var request = URLRequest(url: URL(string: baseURL)!)
         request.httpMethod = "POST"
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue("application/json", forHTTPHeaderField: "Accept")
         
 //        do {
 //            request.httpBody = try JSONSerialization.data(withJSONObject: [PrdFetchQuery].self, options: .prettyPrinted)
